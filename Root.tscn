@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bponl4tqx263q"]
+[gd_scene load_steps=6 format=3 uid="uid://bponl4tqx263q"]
 
 [ext_resource type="Texture2D" uid="uid://bpabpnwc0e5yf" path="res://icon.svg" id="1_1ctoo"]
 [ext_resource type="Script" path="res://player.gd" id="2_43n2e"]
 [ext_resource type="Script" path="res://button.gd" id="3_jvblk"]
+[ext_resource type="Script" path="res://label.gd" id="3_wmvpq"]
+[ext_resource type="Script" path="res://y_label.gd" id="4_rtpqk"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -27,27 +29,44 @@ offset_bottom = 120.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HSlider" type="HSlider" parent="GridContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GridContainer"]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="GridContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 min_value = -1.0
 max_value = 1.0
 step = 0.1
 
-[node name="VSlider" type="VSlider" parent="GridContainer"]
+[node name="XLabel" type="Label" parent="GridContainer/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("3_wmvpq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GridContainer"]
+layout_mode = 2
+
+[node name="VSlider" type="VSlider" parent="GridContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 min_value = -1.0
 max_value = 1.0
 step = 0.1
 
-[node name="Button" type="Button" parent="GridContainer"]
+[node name="YLabel" type="Label" parent="GridContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+script = ExtResource("4_rtpqk")
+
+[node name="Button" type="Button" parent="GridContainer/VBoxContainer"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_horizontal = 0
 script = ExtResource("3_jvblk")
 
-[connection signal="value_changed" from="GridContainer/HSlider" to="GridContainer/Button" method="_on_h_slider_value_changed"]
-[connection signal="value_changed" from="GridContainer/VSlider" to="GridContainer/Button" method="_on_v_slider_value_changed"]
-[connection signal="pressed" from="GridContainer/Button" to="GridContainer/Button" method="_on_pressed"]
-[connection signal="send_impulse" from="GridContainer/Button" to="Player" method="_on_button_send_impulse"]
+[connection signal="value_changed" from="GridContainer/HBoxContainer/HSlider" to="GridContainer/VBoxContainer/Button" method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="GridContainer/HBoxContainer/HSlider" to="GridContainer/HBoxContainer/XLabel" method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="GridContainer/VBoxContainer/VSlider" to="GridContainer/VBoxContainer/Button" method="_on_v_slider_value_changed"]
+[connection signal="value_changed" from="GridContainer/VBoxContainer/VSlider" to="GridContainer/VBoxContainer/YLabel" method="_on_v_slider_value_changed"]
+[connection signal="pressed" from="GridContainer/VBoxContainer/Button" to="GridContainer/VBoxContainer/Button" method="_on_pressed"]
+[connection signal="send_impulse" from="GridContainer/VBoxContainer/Button" to="Player" method="_on_button_send_impulse"]
