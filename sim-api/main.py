@@ -11,7 +11,6 @@ from fastapi import FastAPI, Header, HTTPException
 import uvicorn
 from sentence_transformers import SentenceTransformer
 import torch
-import torch
 from settings import MODEL_NAME, DEVICE
 
 
@@ -99,7 +98,8 @@ async def get_sim(user_text: str = Header(), new_bubbles: Annotated[str | None, 
 
     similarities = list(similarities.cpu().tolist())
 
-    return {"user_text": user_text, "bubbles": state.bubbles, "similarities": similarities}
+    result = [{"bubble": a, "value": b} for a, b in zip(state.bubbles, similarities)]
+    return result
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000, reload=False)
