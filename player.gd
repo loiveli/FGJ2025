@@ -6,7 +6,7 @@ var bubbles: Dictionary
 var followers: int = 10
 
 @onready
-var animation_player = $Animated/AnimationPlayer
+var animation_player: AnimationPlayer = $Animated/AnimationPlayer
 var is_moving: bool = false
 
 
@@ -21,7 +21,6 @@ func _ready():
 	
 func _on_button_send_impulse(impulseVector: Vector2) -> void:
 	targetPosition = position + impulseVector
-	
 
 
 func _physics_process(delta: float) -> void:
@@ -48,7 +47,10 @@ func _on_tweet_received(result):
 			var bubble = bubbles[similarity.bubble]
 			moveVector += position.direction_to(bubble.position) * (similarity.value * 500)
 	targetPosition = position + moveVector
-
+	
+	if targetPosition != self.position:
+		self.scale.x = sign(targetPosition.x - self.position.x) * 1.0
+		self.animation_player.play("walk")
 	
 func _draw():
 	draw_circle((targetPosition - global_position), 10, Color("BLUE"))
