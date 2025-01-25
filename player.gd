@@ -18,7 +18,7 @@ func _on_button_send_impulse(impulseVector:Vector2) -> void:
 	targetPosition = position + impulseVector
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if (position - targetPosition).length()>speed*delta:
 		var move = move_and_collide(position.direction_to(targetPosition)*speed*delta)
 		if move:
