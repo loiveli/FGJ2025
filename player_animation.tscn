@@ -1030,6 +1030,7 @@ _data = {
 }
 
 [node name="Animated" type="Node2D"]
+scale = Vector2(0.2, 0.2)
 metadata/_edit_vertical_guides_ = [-39.0]
 
 [node name="polygons" type="Node2D" parent="."]
@@ -1126,7 +1127,6 @@ rest = Transform2D(1, 0, 0, 1, 2, -182)
 
 [node name="head" type="Bone2D" parent="skeleton/hip/upperbody"]
 position = Vector2(-2, -13)
-scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, -2, -13)
 
 [node name="jaw" type="Bone2D" parent="skeleton/hip/upperbody/head"]
@@ -1161,7 +1161,6 @@ rest = Transform2D(0.707875, 0.874121, -1.10381, 0.893881, -33, 63)
 [node name="arm23" type="Bone2D" parent="skeleton/hip/upperbody/arm21/arm22"]
 position = Vector2(-18.7833, 71.0639)
 rotation = -1.60913
-scale = Vector2(1, 1)
 rest = Transform2D(-0.0383243, -0.999265, 0.999265, -0.0383243, -4.89348, 70.3576)
 
 [node name="leg11" type="Bone2D" parent="skeleton/hip"]

@@ -78,8 +78,7 @@ tweetText = NodePath("../../TweetEdit")
 API = NodePath("../../../../../API")
 
 [node name="Animated" parent="Player" instance=ExtResource("7_l1adc")]
-position = Vector2(-15, -88)
-scale = Vector2(0.2, 0.2)
+position = Vector2(-14, -93)
 
 [node name="Enemy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("player")]
 position = Vector2(0, 200)
