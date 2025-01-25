@@ -62,4 +62,5 @@ func _on_tweet_received(text, result):
 		self.animation_player.play("walk")
 	
 func _draw():
-	draw_circle((targetPosition - global_position), 10, Color("BLUE"))
+	pass
+	# draw_circle((targetPosition - global_position), 10, Color("BLUE"))
