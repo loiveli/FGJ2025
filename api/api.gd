@@ -5,14 +5,14 @@ signal similarity_response(similarities: Array[Similarity])
 
 class Similarity:
 	var value: float
-	var topic: String
+	var bubble: String
 	
 	func _init(v,t):
 		value = v
-		topic = t
+		bubble = t
 	
 func similarity_from_dict(d) -> Similarity:
-		return Similarity.new(d["value"], d["topic"])
+		return Similarity.new(d["value"], d["bubble"])
 
 
 @onready
