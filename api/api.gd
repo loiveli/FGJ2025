@@ -2,10 +2,21 @@ extends Node2D
 
 # Used to skip querying the similarity API
 @export var RETURN_HARDCODED_VALUE = false
-var TEST_RESPONSE: Array[Similarity] = [
+var TEST_RESPONSES: Array = [[
 	Similarity.new(0.9, "Movies"),
 	Similarity.new(0.1, "Games")
-]
+],[
+	Similarity.new(0.9, "Games"),
+	Similarity.new(0.1, "NBA")
+],[
+	Similarity.new(0.9, "NBA"),
+	Similarity.new(0.1, "Games")
+],[
+	Similarity.new(0.7, "Movies"),
+	Similarity.new(0.6, "Games"),
+	Similarity.new(0.9, "Nascar"),
+	Similarity.new(0.5, "Rock")
+]]
 
 signal similarity_response(similarities: Array[Similarity])
 
@@ -41,7 +52,8 @@ func get_similarity(input: String, bubbles: Array = []):
 
 func get_similarity_async(input, bubbles: Array = []):
 	if RETURN_HARDCODED_VALUE:
-		return TEST_RESPONSE
+		
+		return TEST_RESPONSES[randi_range(0,TEST_RESPONSES.size()-1)]
 	
 	self.get_similarity(input, bubbles)
 	var response = await self.similarity_response
