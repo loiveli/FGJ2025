@@ -4,6 +4,11 @@ var targetPosition: Vector2 = position
 const speed: int = 25
 var bubbles: Dictionary
 
+@onready
+var animation_player = $Animated/AnimationPlayer
+var is_moving: bool = false
+
+
 @export var tweetButton: Button
 
 func _ready():
@@ -15,6 +20,7 @@ func _ready():
 	
 func _on_button_send_impulse(impulseVector: Vector2) -> void:
 	targetPosition = position + impulseVector
+	
 
 
 func _physics_process(delta: float) -> void:
@@ -27,8 +33,9 @@ func _physics_process(delta: float) -> void:
 		queue_redraw()
 	else:
 		position = targetPosition
+		self.animation_player.stop(false)
 	
-	
+
 func _on_tweet_received(result):
 	
 	var moveVector = Vector2(0, 0)
