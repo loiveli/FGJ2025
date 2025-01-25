@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnvtkc7iu6ta2"
-path="res://.godot/imported/troll.png-9acc1766882ca3ed61e09510178cd9e3.ctex"
+uid="uid://cut1wphvb7rgo"
+path="res://.godot/imported/phone_new.png-1e474c1aad2b00fb8d1b1a7566e4053e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/troll.png"
-dest_files=["res://.godot/imported/troll.png-9acc1766882ca3ed61e09510178cd9e3.ctex"]
+source_file="res://assets/phone_new.png"
+dest_files=["res://.godot/imported/phone_new.png-1e474c1aad2b00fb8d1b1a7566e4053e.ctex"]
 
 [params]
 
