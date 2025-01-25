@@ -1,7 +1,7 @@
 extends Node2D
 
 # Used to skip querying the similarity API
-const RETURN_HARDCODED_VALUE = true
+const RETURN_HARDCODED_VALUE = false
 var TEST_RESPONSE: Array[Similarity] = [
 	Similarity.new(0.9, "Movies"),
 	Similarity.new(0.1, "Games")
