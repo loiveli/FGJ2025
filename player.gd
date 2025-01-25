@@ -24,6 +24,6 @@ func _process(delta: float) -> void:
 	
 	
 func _on_tweet_recieved(result):
-	targetPosition = position+Vector2(0,100)
+	targetPosition = position+(result*100)
 func _draw():
 	draw_circle((targetPosition-global_position), 10, Color("BLUE"))

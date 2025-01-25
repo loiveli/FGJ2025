@@ -45,7 +45,6 @@ func _on_request_completed(result, response_code, headers, body):
 
 func _parse_response_json(body) -> Array:
 	var json = JSON.new()
-	print(body)
 	var parse_result = json.parse(body.get_string_from_utf8())
 	
 	var result = []
