@@ -3,6 +3,7 @@ extends CharacterBody2D
 var targetPosition: Vector2 = position
 const speed: int = 25
 var bubbles: Dictionary
+var followers: int = 10
 
 @onready
 var animation_player = $Animated/AnimationPlayer
