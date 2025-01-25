@@ -24,7 +24,7 @@ func _ready() -> void:
 	http.request_completed.connect(_on_request_completed)
 
 func get_similarity(input: String, bubbles: Array = []):
-	var headers: Array[String] = ["user-text: %s" % input]
+	var headers: Array[String] = ["user-text: %s" % input.uri_encode()]
 	if bubbles.size() > 0:
 		headers.append("new-bubbles: %s" % ",".join(bubbles))
 	
