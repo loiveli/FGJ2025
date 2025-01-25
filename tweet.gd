@@ -10,6 +10,7 @@ signal tweet_recieved(result)
 
 func _on_pressed() -> void:
 	var tweet = tweetText.text
+	print(tweet)
 	var result = await API.get_similarity_async(tweet)
 	tweet_recieved.emit(result)
 	print("Tweet done: "+ result)
