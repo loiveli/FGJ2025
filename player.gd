@@ -3,30 +3,28 @@ extends CharacterBody2D
 var targetPosition: Vector2 = position
 const speed: int = 25
 var bubbles: Dictionary
+var followers: int = 10
 
 @onready
-var animation_player = $Animated/AnimationPlayer
+var animation_player: AnimationPlayer = $Animated/AnimationPlayer
 var is_moving: bool = false
 
 @export var tweetButton: Button
 
 func _ready():
 	tweetButton.tweet_received.connect(_on_tweet_received)
-	var childNodes = $"..".get_children().filter(func (child): return child is StaticBody2D)
+	var childNodes = $"..".get_children().filter(func(child): return child is StaticBody2D)
 	for node in childNodes:
 		bubbles[node.bubble] = node
 	
-
-func _on_button_send_impulse(impulseVector:Vector2) -> void:
+func _on_button_send_impulse(impulseVector: Vector2) -> void:
 	targetPosition = position + impulseVector
-	
-
 
 func _physics_process(delta: float) -> void:
-	if (position - targetPosition).length()>speed*delta:
-		var move = move_and_collide(position.direction_to(targetPosition)*speed*delta)
+	if (position - targetPosition).length() > speed * delta:
+		var move = move_and_collide(position.direction_to(targetPosition) * speed * delta)
 		if move:
-			position = Vector2(250,250)
+			position = Vector2(250, 250)
 			print(move)
 			targetPosition = position
 		queue_redraw()
@@ -39,17 +37,20 @@ func _on_tweet_received(result):
 	var moveVector = Vector2(0,0)
 	for similarity in result:
 		# Calculate movement vector delta
-		print(str(similarity.bubble)+ " : " + str(similarity.value))
+		print(str(similarity.bubble) + " : " + str(similarity.value))
 		var maxValue = 0
-		if similarity.value > 0.3 and similarity.value > maxValue/2.0:
-			maxValue = similarity.value if similarity.value >  maxValue else maxValue
+		if similarity.value > 0.3 and similarity.value > maxValue / 2.0:
+			maxValue = similarity.value if similarity.value > maxValue else maxValue
 			var bubble = bubbles[similarity.bubble]
 			moveVector += position.direction_to(bubble.position) * (similarity.value*500)
 		
 		# Send notifications
 		bubbles[similarity.bubble].new_notification(similarity.value)
 	targetPosition = position+ moveVector
-
+	
+	if targetPosition != self.position:
+		self.animation_player.scale.x = -1 if targetPosition.x < self.position.x else 1
+		self.animation_player.play("walk")
 	
 func _draw():
-	draw_circle((targetPosition-global_position), 10, Color("BLUE"))
+	draw_circle((targetPosition - global_position), 10, Color("BLUE"))

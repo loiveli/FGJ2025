@@ -2,15 +2,15 @@
 
 [ext_resource type="Script" path="res://tweet_container.gd" id="1_ni4l5"]
 
-[node name="TweetContainer" type="VBoxContainer" node_paths=PackedStringArray("tweetText", "tweetLikes", "tweetRetweet")]
+[node name="TweetContainer" type="VBoxContainer" node_paths=PackedStringArray("tweetTextLabel", "tweetLikesLabel", "tweetRetweetLabel")]
 custom_minimum_size = Vector2(0, 50)
 script = ExtResource("1_ni4l5")
-tweetText = NodePath("TweetText")
-tweetLikes = NodePath("TweetStats/TweetLikes")
-tweetRetweet = NodePath("TweetStats/TweetRetweet")
+tweetTextLabel = NodePath("TweetText")
+tweetLikesLabel = NodePath("TweetStats/TweetLikes")
+tweetRetweetLabel = NodePath("TweetStats/TweetRetweet")
 
 [node name="TweetText" type="Label" parent="."]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 autowrap_mode = 3
