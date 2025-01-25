@@ -87,7 +87,7 @@ async def get_sim(user_text: str = Header(), new_bubbles: Annotated[str | None, 
     else:
         if not state.bubbles:
             raise HTTPException(status_code=404, detail="No previous bubbles found, nothing to compare user text against!")
-
+    
     user_text_embedding = torch.Tensor(model.embed(user_text, use_prompt=True)).unsqueeze(0).to(model.device)
     similarities = torch.zeros([len(state.bubbles)]).to(model.device)
 

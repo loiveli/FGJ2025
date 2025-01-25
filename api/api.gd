@@ -23,7 +23,7 @@ const API_URL = "http://localhost:8000/sim"
 func _ready() -> void:
 	http.request_completed.connect(_on_request_completed)
 
-func get_similarity(input: String, bubbles: Array[String] = ["Rock","Sports","Memes"]):
+func get_similarity(input: String, bubbles: Array = []):
 	var headers: Array[String] = ["user-text: %s" % input]
 	if bubbles.size() > 0:
 		headers.append("new-bubbles: %s" % ",".join(bubbles))
@@ -33,8 +33,8 @@ func get_similarity(input: String, bubbles: Array[String] = ["Rock","Sports","Me
 	if result != OK:
 		print("API error")
 
-func get_similarity_async(input):
-	self.get_similarity(input)
+func get_similarity_async(input, bubbles):
+	self.get_similarity(input, bubbles)
 	var response = await self.similarity_response
 	return response
 

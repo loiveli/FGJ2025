@@ -36,25 +36,28 @@ layout_mode = 2
 custom_minimum_size = Vector2(175, 100)
 layout_mode = 2
 placeholder_text = "Write tweet here"
+wrap_mode = 1
 
-[node name="Button" type="Button" parent="DebugUI/HBoxContainer" node_paths=PackedStringArray("tweetText", "API")]
+[node name="Button" type="Button" parent="DebugUI/HBoxContainer" node_paths=PackedStringArray("player", "tweetText", "API")]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 text = "Tweet"
 script = ExtResource("3_063s7")
+player = NodePath("../../../Player")
 tweetText = NodePath("../TextEdit")
 API = NodePath("../../../API")
 
 [node name="SportsBubble" parent="." instance=ExtResource("4_1fda2")]
 position = Vector2(107, 67)
+bubble = "NBA"
 
 [node name="RockBubble" parent="." instance=ExtResource("4_1fda2")]
 position = Vector2(781, 83)
-bubble = "Rock"
+bubble = "Nascar"
 
 [node name="MemeBubble" parent="." instance=ExtResource("4_1fda2")]
 position = Vector2(422, 575)
-bubble = "Memes"
+bubble = "Premier league"
 
 [node name="API" parent="." instance=ExtResource("4_vjfwk")]
 position = Vector2(-35, 207)

@@ -12,6 +12,7 @@ func _ready():
 	for node in childNodes:
 		bubbles[node.bubble] = node
 	
+	
 
 func _on_button_send_impulse(impulseVector:Vector2) -> void:
 	targetPosition = position + impulseVector
@@ -28,6 +29,7 @@ func _process(delta: float) -> void:
 	
 	
 func _on_tweet_received(result):
+	
 	var moveVector = Vector2(0,0)
 	for similarity in result:
 		print(str(similarity.bubble)+ " : " + str(similarity.value))
