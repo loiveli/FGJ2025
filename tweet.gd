@@ -31,9 +31,11 @@ func sendTweet(tweet):
 		bubblesSent= true
 		print("Tweet done")
 
-	var followers = tweet.length()
-	for value in result:
-		if value > 0.3:
-			followers *= value
+	var followers: int = 0
+	for sim in result:
+		print(sim.bubble," ",sim.value)
+		if sim.value > 0.3:
+			followers += (sim.value*followers) * tweet.length()*100
+	
 	player.followers += followers
 	
