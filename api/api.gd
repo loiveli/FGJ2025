@@ -43,10 +43,10 @@ func _on_request_completed(result, response_code, headers, body):
 	var similarities: Array[Similarity] = _parse_response_json(body)
 	similarity_response.emit(similarities)
 
-func _parse_response_json(body) -> Array[Similarity]:
+func _parse_response_json(body) -> Array:
 	var json = JSON.new()
 	print(body)
-	var parse_result = json.parse(body)
+	var parse_result = json.parse(body.get_string_from_utf8)
 	
 	var result = []
 	
