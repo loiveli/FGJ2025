@@ -23,13 +23,12 @@ const API_URL = "http://localhost:9000/similarity"
 func _ready() -> void:
 	http.request_completed.connect(_on_request_completed)
 
-func get_similarity(input):
-	var result = http.request(
-		API_URL,
-		[],
-		HTTPClient.METHOD_POST,
-		JSON.new().stringify({ "input": input })
-	)
+func get_similarity(input: String, bubbles: Array[String] = []):
+	var headers: Array[String] = ["user-text: %s" % input]
+	if bubbles.size() > 0:
+		headers.append("new-bubbles: %s" % ",".join(bubbles))
+	
+	var result = http.request(API_URL, headers, HTTPClient.METHOD_GET)
 	
 	if result != OK:
 		print("API error")
@@ -39,6 +38,7 @@ func get_similarity_async(input):
 	var response = await self.similarity_response
 	return response
 
+@warning_ignore("unused_parameter")
 func _on_request_completed(result, response_code, headers, body):
 	var similarities: Array[Similarity] = _parse_response_json(body)
 	similarity_response.emit(similarities)
