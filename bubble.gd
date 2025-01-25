@@ -36,8 +36,8 @@ func _ready():
 	
 func _create_bot_timer():
 	var bot_spawn_timer := Timer.new()
-	var timer_mean = 5
-	var timer_delta = randf_range(-5, 5)
+	var timer_mean = 30
+	var timer_delta = randf_range(-10, 10)
 	
 	bot_spawn_timer.wait_time = timer_mean + timer_delta
 	bot_spawn_timer.one_shot = true

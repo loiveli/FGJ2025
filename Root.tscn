@@ -1,6 +1,5 @@
-[gd_scene load_steps=15 format=3 uid="uid://bponl4tqx263q"]
+[gd_scene load_steps=13 format=3 uid="uid://bponl4tqx263q"]
 
-[ext_resource type="Texture2D" uid="uid://bpabpnwc0e5yf" path="res://icon.svg" id="1_1ctoo"]
 [ext_resource type="Script" path="res://tweet_feed.gd" id="2_5e6nj"]
 [ext_resource type="Script" path="res://player.gd" id="2_43n2e"]
 [ext_resource type="Texture2D" uid="uid://cut1wphvb7rgo" path="res://assets/phone_new.png" id="2_b5mc6"]
@@ -10,8 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dglcxe3psg068" path="res://bubble.tscn" id="4_1fda2"]
 [ext_resource type="Script" path="res://tweet_character_label.gd" id="4_lodnv"]
 [ext_resource type="PackedScene" uid="uid://dfr54ojd8lgxj" path="res://api/api.tscn" id="4_vjfwk"]
-[ext_resource type="Script" path="res://enemy.gd" id="6_46yek"]
-[ext_resource type="PackedScene" uid="uid://dj5w16egv7oge" path="res://player_animation.tscn" id="7_l1adc"]
+[ext_resource type="PackedScene" uid="uid://dsb27wfudse5n" path="res://player_animation.tscn" id="7_l1adc"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_oxstc"]
 device = -1
@@ -111,20 +109,6 @@ tweetEdit = NodePath("../../TweetEdit")
 
 [node name="Animated" parent="Player" instance=ExtResource("7_l1adc")]
 position = Vector2(-14, -93)
-
-[node name="Enemy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("player")]
-position = Vector2(0, 200)
-script = ExtResource("6_46yek")
-player = NodePath("../Player")
-
-[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
-modulate = Color(1, 0, 0, 1)
-scale = Vector2(0.234375, 0.0937501)
-texture = ExtResource("1_1ctoo")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemy"]
-scale = Vector2(0.234375, 0.0937501)
-polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64, 59.6, 64, 63.9, 59, 64, -61.1)
 
 [node name="SportsBubble" parent="." instance=ExtResource("4_1fda2")]
 position = Vector2(107, 67)
