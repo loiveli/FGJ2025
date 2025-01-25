@@ -8,7 +8,6 @@ var bubbles: Dictionary
 var animation_player = $Animated/AnimationPlayer
 var is_moving: bool = false
 
-
 @export var tweetButton: Button
 
 func _ready():
@@ -16,7 +15,6 @@ func _ready():
 	var childNodes = $"..".get_children().filter(func (child): return child is StaticBody2D)
 	for node in childNodes:
 		bubbles[node.bubble] = node
-	
 	
 
 func _on_button_send_impulse(impulseVector:Vector2) -> void:
@@ -38,18 +36,20 @@ func _physics_process(delta: float) -> void:
 	
 
 func _on_tweet_received(result):
-	
 	var moveVector = Vector2(0,0)
 	for similarity in result:
+		# Calculate movement vector delta
 		print(str(similarity.bubble)+ " : " + str(similarity.value))
 		var maxValue = 0
 		if similarity.value > 0.3 and similarity.value > maxValue/2.0:
 			maxValue = similarity.value if similarity.value >  maxValue else maxValue
 			var bubble = bubbles[similarity.bubble]
 			moveVector += position.direction_to(bubble.position) * (similarity.value*500)
+		
+		# Send notifications
+		bubbles[similarity.bubble].new_notification(similarity.value)
 	targetPosition = position+ moveVector
 
-	
 	
 func _draw():
 	draw_circle((targetPosition-global_position), 10, Color("BLUE"))

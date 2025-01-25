@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8cgnxgyutml0"]
+
+[ext_resource type="Texture2D" uid="uid://baj5wv7i3oeli" path="res://assets/heart.png" id="1_ydn1m"]
+[ext_resource type="Script" path="res://heart_notification.gd" id="2_k26i6"]
+
+[node name="HeartNotification" type="Sprite2D"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_ydn1m")
+script = ExtResource("2_k26i6")

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbuo8l02gnqk6"]
+
+[ext_resource type="Texture2D" uid="uid://tu2ju2tl44qq" path="res://assets/poop.png" id="1_1uefr"]
+[ext_resource type="Script" path="res://poop_notification.gd" id="2_b4q0b"]
+
+[node name="PoopNotification" type="Sprite2D"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_1uefr")
+script = ExtResource("2_b4q0b")
