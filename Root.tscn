@@ -3,10 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://bpabpnwc0e5yf" path="res://icon.svg" id="1_1ctoo"]
 [ext_resource type="Script" path="res://player.gd" id="2_43n2e"]
 [ext_resource type="Script" path="res://tweet.gd" id="3_063s7"]
+[ext_resource type="PackedScene" uid="uid://hprip2fjn5c7" path="res://bubble.tscn" id="4_1fda2"]
 [ext_resource type="PackedScene" uid="uid://dfr54ojd8lgxj" path="res://api/api.tscn" id="4_vjfwk"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_8g1rm"]
-radius = 53.0094
 
 [node name="Node2D" type="Node2D"]
 
@@ -47,12 +45,18 @@ script = ExtResource("3_063s7")
 tweetText = NodePath("../TextEdit")
 API = NodePath("../../../API")
 
-[node name="Bubble2" type="StaticBody2D" parent="."]
+[node name="SportsBubble" parent="." instance=ExtResource("4_1fda2")]
+position = Vector2(107, 67)
 
-[node name="BubbleCollider" type="CollisionShape2D" parent="Bubble2"]
-position = Vector2(522, 49)
-shape = SubResource("CircleShape2D_8g1rm")
+[node name="RockBubble" parent="." instance=ExtResource("4_1fda2")]
+position = Vector2(781, 83)
+bubble = "Rock"
+
+[node name="MemeBubble" parent="." instance=ExtResource("4_1fda2")]
+position = Vector2(422, 575)
+bubble = "Memes"
 
 [node name="API" parent="." instance=ExtResource("4_vjfwk")]
+position = Vector2(-35, 207)
 
 [connection signal="pressed" from="DebugUI/HBoxContainer/Button" to="DebugUI/HBoxContainer/Button" method="_on_pressed"]
