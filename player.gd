@@ -59,7 +59,7 @@ func _on_tweet_received(text, result):
 	targetPosition = position + moveVector
 	
 	if targetPosition != self.position:
-		self.scale.x = sign(targetPosition.x - self.position.x) * 1.0
+		self.animation_player.scale.x = -1 if targetPosition.x < self.position.x else 1
 		self.animation_player.play("walk")
 	
 func _draw():
