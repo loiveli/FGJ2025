@@ -8,6 +8,7 @@ export_presets.cfg
 .vscode/
 # Imported translations (automatically generated from CSV files)
 *.translation
+venv/
 
 # Mono-specific ignores
 .mono/
