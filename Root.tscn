@@ -1,16 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://bponl4tqx263q"]
+[gd_scene load_steps=6 format=3 uid="uid://bponl4tqx263q"]
 
 [ext_resource type="Texture2D" uid="uid://bpabpnwc0e5yf" path="res://icon.svg" id="1_1ctoo"]
 [ext_resource type="Script" path="res://player.gd" id="2_43n2e"]
+[ext_resource type="Script" path="res://tweet.gd" id="3_063s7"]
+[ext_resource type="PackedScene" uid="uid://dfr54ojd8lgxj" path="res://api/api.tscn" id="4_vjfwk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8g1rm"]
 radius = 53.0094
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Player" type="CharacterBody2D" parent="."]
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("tweetButton")]
 position = Vector2(500, 250)
 script = ExtResource("2_43n2e")
+tweetButton = NodePath("../DebugUI/HBoxContainer/Button")
 
 [node name="PlayerSprite" type="Sprite2D" parent="Player"]
 scale = Vector2(0.25, 0.25)
@@ -36,13 +39,21 @@ custom_minimum_size = Vector2(175, 100)
 layout_mode = 2
 placeholder_text = "Write tweet here"
 
-[node name="Button" type="Button" parent="DebugUI/HBoxContainer"]
+[node name="Button" type="Button" parent="DebugUI/HBoxContainer" node_paths=PackedStringArray("tweetText", "API")]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 text = "Tweet"
+script = ExtResource("3_063s7")
+tweetText = NodePath("../TextEdit")
+API = NodePath("../../../API")
 
 [node name="Bubble2" type="StaticBody2D" parent="."]
 
 [node name="BubbleCollider" type="CollisionShape2D" parent="Bubble2"]
 position = Vector2(522, 49)
 shape = SubResource("CircleShape2D_8g1rm")
+
+[node name="API" parent="." instance=ExtResource("4_vjfwk")]
+
+[connection signal="pressed" from="DebugUI/HBoxContainer/Button" to="DebugUI/HBoxContainer/Button" method="_on_pressed"]
+[connection signal="tweet_recieved" from="DebugUI/HBoxContainer/Button" to="Player" method="_on_button_tweet_recieved"]
