@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var targetPosition: Vector2
-const SPEED = 100
+const SPEED = 30
 
 func _ready():
 	# Target is in the direction of the player but further away.
