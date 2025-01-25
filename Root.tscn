@@ -56,4 +56,3 @@ shape = SubResource("CircleShape2D_8g1rm")
 [node name="API" parent="." instance=ExtResource("4_vjfwk")]
 
 [connection signal="pressed" from="DebugUI/HBoxContainer/Button" to="DebugUI/HBoxContainer/Button" method="_on_pressed"]
-[connection signal="tweet_recieved" from="DebugUI/HBoxContainer/Button" to="Player" method="_on_button_tweet_recieved"]

@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 	
 	
 func _on_tweet_received(result):
-	targetPosition = position + Vector2(0,100)
+	targetPosition = position + (result*100)
 	
 	
 func _draw():
