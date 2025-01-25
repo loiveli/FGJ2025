@@ -1,17 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://bponl4tqx263q"]
+[gd_scene load_steps=7 format=3 uid="uid://bponl4tqx263q"]
 
 [ext_resource type="Texture2D" uid="uid://bpabpnwc0e5yf" path="res://icon.svg" id="1_1ctoo"]
 [ext_resource type="Script" path="res://player.gd" id="2_43n2e"]
 [ext_resource type="Script" path="res://tweet.gd" id="3_063s7"]
 [ext_resource type="PackedScene" uid="uid://hprip2fjn5c7" path="res://bubble.tscn" id="4_1fda2"]
 [ext_resource type="PackedScene" uid="uid://dfr54ojd8lgxj" path="res://api/api.tscn" id="4_vjfwk"]
+[ext_resource type="Script" path="res://enemy.gd" id="6_46yek"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("tweetButton")]
 position = Vector2(500, 250)
 script = ExtResource("2_43n2e")
-tweetButton = NodePath("../DebugUI/HBoxContainer/Button")
+tweetButton = NodePath("DebugUI/HBoxContainer/Button")
 
 [node name="PlayerSprite" type="Sprite2D" parent="Player"]
 scale = Vector2(0.25, 0.25)
@@ -21,45 +22,73 @@ texture = ExtResource("1_1ctoo")
 scale = Vector2(0.25, 0.25)
 polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64, 59.6, 64, 63.9, 59, 64, -61.1)
 
-[node name="DebugUI" type="GridContainer" parent="."]
-offset_left = 886.0
-offset_top = -3.0
-offset_right = 1154.0
-offset_bottom = 653.0
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="DebugUI" type="GridContainer" parent="Player"]
+offset_left = 303.0
+offset_top = -325.0
+offset_right = 571.0
+offset_bottom = 331.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="DebugUI"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Player/DebugUI"]
 layout_mode = 2
 
-[node name="TextEdit" type="TextEdit" parent="DebugUI/HBoxContainer"]
+[node name="TextEdit" type="TextEdit" parent="Player/DebugUI/HBoxContainer"]
 custom_minimum_size = Vector2(175, 100)
 layout_mode = 2
 placeholder_text = "Write tweet here"
 wrap_mode = 1
 
-[node name="Button" type="Button" parent="DebugUI/HBoxContainer" node_paths=PackedStringArray("player", "tweetText", "API")]
+[node name="Button" type="Button" parent="Player/DebugUI/HBoxContainer" node_paths=PackedStringArray("player", "tweetText", "API")]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 text = "Tweet"
 script = ExtResource("3_063s7")
-player = NodePath("../../../Player")
+player = NodePath("../../..")
 tweetText = NodePath("../TextEdit")
-API = NodePath("../../../API")
+API = NodePath("../../../../API")
+
+[node name="Enemy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("player")]
+position = Vector2(0, 200)
+script = ExtResource("6_46yek")
+player = NodePath("../Player")
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(0.234375, 0.0937501)
+texture = ExtResource("1_1ctoo")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemy"]
+scale = Vector2(0.234375, 0.0937501)
+polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64, 59.6, 64, 63.9, 59, 64, -61.1)
 
 [node name="SportsBubble" parent="." instance=ExtResource("4_1fda2")]
 position = Vector2(107, 67)
 bubble = "NBA"
 
 [node name="RockBubble" parent="." instance=ExtResource("4_1fda2")]
-position = Vector2(781, 83)
+position = Vector2(1071, 51)
 bubble = "Nascar"
 
 [node name="MemeBubble" parent="." instance=ExtResource("4_1fda2")]
-position = Vector2(422, 575)
+position = Vector2(1490, 569)
 bubble = "Premier league"
 
 [node name="API" parent="." instance=ExtResource("4_vjfwk")]
 position = Vector2(-35, 207)
 
-[connection signal="pressed" from="DebugUI/HBoxContainer/Button" to="DebugUI/HBoxContainer/Button" method="_on_pressed"]
+[node name="MemeBubble4" parent="." instance=ExtResource("4_1fda2")]
+position = Vector2(879, 567)
+bubble = "Games"
+
+[node name="MemeBubble2" parent="." instance=ExtResource("4_1fda2")]
+position = Vector2(349, 945)
+bubble = "Rock"
+
+[node name="MemeBubble3" parent="." instance=ExtResource("4_1fda2")]
+position = Vector2(-178, 484)
+bubble = "Movies"
+
+[connection signal="pressed" from="Player/DebugUI/HBoxContainer/Button" to="Player/DebugUI/HBoxContainer/Button" method="_on_pressed"]

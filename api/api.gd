@@ -17,7 +17,7 @@ func similarity_from_dict(d) -> Similarity:
 
 @onready
 var http: HTTPRequest = $HTTPRequest
-const API_URL = "http://localhost:8000/sim"
+const API_URL = "http://127.0.0.1:8000/sim"
 
 
 func _ready() -> void:
@@ -33,7 +33,7 @@ func get_similarity(input: String, bubbles: Array = []):
 	if result != OK:
 		print("API error")
 
-func get_similarity_async(input, bubbles):
+func get_similarity_async(input, bubbles: Array = []):
 	self.get_similarity(input, bubbles)
 	var response = await self.similarity_response
 	return response

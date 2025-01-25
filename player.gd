@@ -18,10 +18,11 @@ func _on_button_send_impulse(impulseVector:Vector2) -> void:
 	targetPosition = position + impulseVector
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if (position - targetPosition).length()>speed*delta:
 		var move = move_and_collide(position.direction_to(targetPosition)*speed*delta)
 		if move:
+			position = Vector2(250,250)
 			print(move)
 		queue_redraw()
 	else:
@@ -33,8 +34,11 @@ func _on_tweet_received(result):
 	var moveVector = Vector2(0,0)
 	for similarity in result:
 		print(str(similarity.bubble)+ " : " + str(similarity.value))
-		var bubble = bubbles[similarity.bubble]
-		moveVector += position.direction_to(bubble.position) * (similarity.value*1000)
+		var maxValue = 0
+		if similarity.value > 0.3 and similarity.value > maxValue/2.0:
+			maxValue = similarity.value if similarity.value >  maxValue else maxValue
+			var bubble = bubbles[similarity.bubble]
+			moveVector += position.direction_to(bubble.position) * (similarity.value*500)
 	targetPosition = position+ moveVector
 
 	
