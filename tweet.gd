@@ -19,15 +19,21 @@ func sendTweet(tweet):
 	var id = idNum
 	idNum +=1
 	tweet_sent.emit(id,tweet)
-	
+	var result
 	
 	if bubblesSent:
-		var result = await API.get_similarity_async(tweet)
+		result = await API.get_similarity_async(tweet)
 		tweet_received.emit(id,result)
 		print("Tweet done")
 	else:
-		var result = await API.get_similarity_async(tweet,bubbles)
+		result = await API.get_similarity_async(tweet,bubbles)
 		tweet_received.emit(id,result)
 		bubblesSent= true
 		print("Tweet done")
+
+	var followers = tweet.length()
+	for value in result:
+		if value > 0.3:
+			followers *= value
+	player.followers += followers
 	
