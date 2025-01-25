@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dglcxe3psg068" path="res://bubble.tscn" id="4_1fda2"]
 [ext_resource type="Script" path="res://tweet_character_label.gd" id="4_lodnv"]
 [ext_resource type="PackedScene" uid="uid://dfr54ojd8lgxj" path="res://api/api.tscn" id="4_vjfwk"]
-[ext_resource type="PackedScene" uid="uid://dsb27wfudse5n" path="res://player_animation.tscn" id="7_l1adc"]
+[ext_resource type="PackedScene" uid="uid://dj5w16egv7oge" path="res://player_animation.tscn" id="7_l1adc"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_oxstc"]
 device = -1
@@ -47,10 +47,10 @@ expand_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Player/Container"]
 layout_mode = 2
-theme_override_constants/margin_left = 25
+theme_override_constants/margin_left = 35
 theme_override_constants/margin_top = 80
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 80
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 120
 
 [node name="TwitterUI" type="VBoxContainer" parent="Player/Container/MarginContainer"]
 layout_mode = 2
@@ -82,8 +82,12 @@ script = ExtResource("3_fxa6y")
 layout_mode = 2
 
 [node name="TweetEdit" type="TextEdit" parent="Player/Container/MarginContainer/TwitterUI/NewTweet" node_paths=PackedStringArray("tweetButton")]
-custom_minimum_size = Vector2(250, 100)
+custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
+theme_override_colors/background_color = Color(0.968627, 0.968627, 0.968627, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 placeholder_text = "Write tweet here"
 wrap_mode = 1
 script = ExtResource("3_vcubs")
@@ -95,8 +99,10 @@ layout_mode = 2
 [node name="TweetButton" type="Button" parent="Player/Container/MarginContainer/TwitterUI/NewTweet/VBoxContainer" node_paths=PackedStringArray("player", "tweetText", "API")]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 shortcut = SubResource("Shortcut_364db")
 text = "Tweet"
+flat = true
 script = ExtResource("3_063s7")
 player = NodePath("../../../../../..")
 tweetText = NodePath("../../TweetEdit")
@@ -104,6 +110,10 @@ API = NodePath("../../../../../../../API")
 
 [node name="TweetCharacterLabel" type="Label" parent="Player/Container/MarginContainer/TwitterUI/NewTweet/VBoxContainer" node_paths=PackedStringArray("tweetEdit")]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "0/140"
 script = ExtResource("4_lodnv")
 tweetEdit = NodePath("../../TweetEdit")
 
@@ -124,6 +134,7 @@ bubble = "Premier league"
 
 [node name="API" parent="." instance=ExtResource("4_vjfwk")]
 position = Vector2(-35, 207)
+RETURN_HARDCODED_VALUE = true
 
 [node name="MemeBubble4" parent="." instance=ExtResource("4_1fda2")]
 position = Vector2(879, 567)
