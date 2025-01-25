@@ -53,7 +53,7 @@ func get_similarity(input: String, bubbles: Array = []):
 func get_similarity_async(input, bubbles: Array = []):
 	if RETURN_HARDCODED_VALUE:
 		
-		return TEST_RESPONSES[randi_range(0,TEST_RESPONSES.size())]
+		return TEST_RESPONSES[randi_range(0,TEST_RESPONSES.size()-1)]
 	
 	self.get_similarity(input, bubbles)
 	var response = await self.similarity_response
