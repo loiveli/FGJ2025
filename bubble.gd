@@ -1,5 +1,11 @@
 extends StaticBody2D
 
+var followers: int = 0:
+	set(value):
+		followers = value
+		scale = Vector2(1 + (followers / 20.0),1 + (followers / 20.0))
+
+
 var permanent_person_scene = preload("res://people/permanent_person.tscn")
 var temporary_person_scene = preload("res://people/temporary_person.tscn")
 
@@ -26,9 +32,9 @@ func _get_person_coordinates() -> Vector2:
 	
 	return Vector2(x, y)
 
-func _on_person_timer_timeout():	
+func _on_person_timer_timeout():
 	var temporary_person_instance = temporary_person_scene.instantiate()
 	temporary_person_instance.position = _get_person_coordinates()
 	add_child(temporary_person_instance)
 	
-@export var bubble: String 
+@export var bubble: String

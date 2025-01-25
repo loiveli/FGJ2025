@@ -6,11 +6,13 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _on_add_tweet(text):
+func _on_add_tweet(id,text):
+	print()
 	var newTweet = tweet.instantiate()
-	newTweet.initTweet(text)
+	newTweet.initTweet(id,text)
 	add_child(newTweet)
 
-func _on_update_tweet(tweetText, result):
-	var tweetObject = get_children().filter(func(node):return node.text==tweetText)
+func _on_update_tweet(id, result):
+	var tweetObject = get_children().filter(func(node):return node.tweetID == id)[0]
+
 	tweetObject.updateStats(result[0].value * randi_range(100,1000),result[1].value * randi_range(100,1000))
