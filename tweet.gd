@@ -9,9 +9,11 @@ signal tweet_sent(text: String)
 
 var bubblesSent: bool = false
 
-
 func _on_pressed() -> void:
 	var tweet = tweetText.text
+	sendTweet(tweet)
+
+func sendTweet(tweet):
 	var bubbles = player.bubbles.keys()
 	tweet_sent.emit(tweet)
 	if bubblesSent:
