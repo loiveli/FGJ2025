@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://tweet.gd" id="3_063s7"]
 [ext_resource type="Script" path="res://tweet_list.gd" id="3_fxa6y"]
 [ext_resource type="Script" path="res://TweetEdit.gd" id="3_vcubs"]
-[ext_resource type="PackedScene" uid="uid://hprip2fjn5c7" path="res://bubble.tscn" id="4_1fda2"]
+[ext_resource type="PackedScene" uid="uid://dglcxe3psg068" path="res://bubble.tscn" id="4_1fda2"]
 [ext_resource type="Script" path="res://tweet_character_label.gd" id="4_lodnv"]
 [ext_resource type="PackedScene" uid="uid://dfr54ojd8lgxj" path="res://api/api.tscn" id="4_vjfwk"]
 [ext_resource type="Script" path="res://enemy.gd" id="6_46yek"]
