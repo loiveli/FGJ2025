@@ -9,4 +9,4 @@ func _ready() -> void:
 func _on_add_tweet(text):
 	var newTweet = tweet.instantiate()
 	newTweet.initTweet(text)
-	#add_child(tweet)
+	add_child(newTweet)
