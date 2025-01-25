@@ -1,6 +1,7 @@
 extends Button
 
 signal tweet_received(result)
+signal tweet_sent(text: String)
 
 @export var player: CharacterBody2D
 @export var tweetText: TextEdit
@@ -12,7 +13,7 @@ var bubblesSent: bool = false
 func _on_pressed() -> void:
 	var tweet = tweetText.text
 	var bubbles = player.bubbles.keys()
-	print(tweet)
+	tweet_sent.emit(tweet)
 	if bubblesSent:
 		var result = await API.get_similarity_async(tweet)
 		tweet_received.emit(result)

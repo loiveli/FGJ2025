@@ -24,6 +24,7 @@ func _physics_process(delta: float) -> void:
 		if move:
 			position = Vector2(250,250)
 			print(move)
+			targetPosition = position
 		queue_redraw()
 	else:
 		position = targetPosition

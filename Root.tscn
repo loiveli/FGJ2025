@@ -1,18 +1,30 @@
-[gd_scene load_steps=7 format=3 uid="uid://bponl4tqx263q"]
+[gd_scene load_steps=12 format=3 uid="uid://bponl4tqx263q"]
 
 [ext_resource type="Texture2D" uid="uid://bpabpnwc0e5yf" path="res://icon.svg" id="1_1ctoo"]
 [ext_resource type="Script" path="res://player.gd" id="2_43n2e"]
 [ext_resource type="Script" path="res://tweet.gd" id="3_063s7"]
+[ext_resource type="Script" path="res://tweet_list.gd" id="3_fxa6y"]
+[ext_resource type="Script" path="res://TweetEdit.gd" id="3_vcubs"]
 [ext_resource type="PackedScene" uid="uid://hprip2fjn5c7" path="res://bubble.tscn" id="4_1fda2"]
+[ext_resource type="Script" path="res://tweet_character_label.gd" id="4_lodnv"]
 [ext_resource type="PackedScene" uid="uid://dfr54ojd8lgxj" path="res://api/api.tscn" id="4_vjfwk"]
 [ext_resource type="Script" path="res://enemy.gd" id="6_46yek"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_oxstc"]
+device = -1
+keycode = 4194309
+
+[sub_resource type="Shortcut" id="Shortcut_364db"]
+events = [SubResource("InputEventKey_oxstc")]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("tweetButton")]
+process_priority = 1
+process_physics_priority = 1
 position = Vector2(500, 250)
 script = ExtResource("2_43n2e")
-tweetButton = NodePath("DebugUI/HBoxContainer/Button")
+tweetButton = NodePath("TwitterUI/NewTweet/VBoxContainer/TweetButton")
 
 [node name="PlayerSprite" type="Sprite2D" parent="Player"]
 scale = Vector2(0.25, 0.25)
@@ -24,31 +36,48 @@ polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
-[node name="DebugUI" type="GridContainer" parent="Player"]
+[node name="TwitterUI" type="VBoxContainer" parent="Player"]
 offset_left = 303.0
-offset_top = -325.0
-offset_right = 571.0
-offset_bottom = 331.0
+offset_top = -304.0
+offset_right = 550.0
+offset_bottom = 307.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Player/DebugUI"]
+[node name="TweetList" type="VBoxContainer" parent="Player/TwitterUI"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("3_fxa6y")
+
+[node name="NewTweet" type="HBoxContainer" parent="Player/TwitterUI"]
 layout_mode = 2
 
-[node name="TextEdit" type="TextEdit" parent="Player/DebugUI/HBoxContainer"]
+[node name="TweetEdit" type="TextEdit" parent="Player/TwitterUI/NewTweet"]
 custom_minimum_size = Vector2(175, 100)
 layout_mode = 2
 placeholder_text = "Write tweet here"
 wrap_mode = 1
+script = ExtResource("3_vcubs")
 
-[node name="Button" type="Button" parent="Player/DebugUI/HBoxContainer" node_paths=PackedStringArray("player", "tweetText", "API")]
+[node name="VBoxContainer" type="VBoxContainer" parent="Player/TwitterUI/NewTweet"]
+layout_mode = 2
+
+[node name="TweetCharacterLabel" type="Label" parent="Player/TwitterUI/NewTweet/VBoxContainer" node_paths=PackedStringArray("tweetEdit")]
+layout_mode = 2
+script = ExtResource("4_lodnv")
+tweetEdit = NodePath("../../TweetEdit")
+
+[node name="TweetButton" type="Button" parent="Player/TwitterUI/NewTweet/VBoxContainer" node_paths=PackedStringArray("player", "tweetText", "API")]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
+shortcut = SubResource("Shortcut_364db")
 text = "Tweet"
 script = ExtResource("3_063s7")
-player = NodePath("../../..")
-tweetText = NodePath("../TextEdit")
-API = NodePath("../../../../API")
+player = NodePath("../../../..")
+tweetText = NodePath("../../TweetEdit")
+API = NodePath("../../../../../API")
 
 [node name="Enemy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("player")]
 position = Vector2(0, 200)
@@ -91,4 +120,8 @@ bubble = "Rock"
 position = Vector2(-178, 484)
 bubble = "Movies"
 
-[connection signal="pressed" from="Player/DebugUI/HBoxContainer/Button" to="Player/DebugUI/HBoxContainer/Button" method="_on_pressed"]
+[connection signal="text_changed" from="Player/TwitterUI/NewTweet/TweetEdit" to="Player/TwitterUI/NewTweet/TweetEdit" method="_on_text_changed"]
+[connection signal="text_changed" from="Player/TwitterUI/NewTweet/TweetEdit" to="Player/TwitterUI/NewTweet/VBoxContainer/TweetCharacterLabel" method="_on_tweet_edit_text_changed"]
+[connection signal="pressed" from="Player/TwitterUI/NewTweet/VBoxContainer/TweetButton" to="Player/TwitterUI/NewTweet/VBoxContainer/TweetButton" method="_on_pressed"]
+[connection signal="tweet_sent" from="Player/TwitterUI/NewTweet/VBoxContainer/TweetButton" to="Player/TwitterUI/TweetList" method="_on_add_tweet"]
+[connection signal="tweet_sent" from="Player/TwitterUI/NewTweet/VBoxContainer/TweetButton" to="Player/TwitterUI/NewTweet/TweetEdit" method="_on_tweet_button_tweet_sent"]
