@@ -13,4 +13,4 @@ func _on_pressed() -> void:
 	print(tweet)
 	var result = await API.get_similarity_async(tweet)
 	tweet_recieved.emit(result)
-	print("Tweet done: "+ result)
+	print("Tweet done: ", result)

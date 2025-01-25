@@ -40,7 +40,7 @@ func get_similarity_async(input):
 
 @warning_ignore("unused_parameter")
 func _on_request_completed(result, response_code, headers, body):
-	var similarities: Array[Similarity] = _parse_response_json(body)
+	var similarities: Array = _parse_response_json(body)
 	similarity_response.emit(similarities)
 
 func _parse_response_json(body) -> Array:
