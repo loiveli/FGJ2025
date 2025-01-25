@@ -687,7 +687,7 @@ _data = {
 "walk": SubResource("Animation_hi442")
 }
 
-[node name="PlaceholderNode" type="Node2D"]
+[node name="Animated" type="Node2D"]
 metadata/_edit_vertical_guides_ = [-39.0]
 
 [node name="polygons" type="Node2D" parent="."]

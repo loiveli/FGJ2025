@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bponl4tqx263q"]
+[gd_scene load_steps=13 format=3 uid="uid://bponl4tqx263q"]
 
 [ext_resource type="Texture2D" uid="uid://bpabpnwc0e5yf" path="res://icon.svg" id="1_1ctoo"]
 [ext_resource type="Script" path="res://player.gd" id="2_43n2e"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://tweet_character_label.gd" id="4_lodnv"]
 [ext_resource type="PackedScene" uid="uid://dfr54ojd8lgxj" path="res://api/api.tscn" id="4_vjfwk"]
 [ext_resource type="Script" path="res://enemy.gd" id="6_46yek"]
+[ext_resource type="PackedScene" uid="uid://dj5w16egv7oge" path="res://player_animation.tscn" id="7_l1adc"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_oxstc"]
 device = -1
@@ -25,10 +26,6 @@ process_physics_priority = 1
 position = Vector2(500, 250)
 script = ExtResource("2_43n2e")
 tweetButton = NodePath("TwitterUI/NewTweet/VBoxContainer/TweetButton")
-
-[node name="PlayerSprite" type="Sprite2D" parent="Player"]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_1ctoo")
 
 [node name="PlayerCollider" type="CollisionPolygon2D" parent="Player"]
 scale = Vector2(0.25, 0.25)
@@ -78,6 +75,10 @@ script = ExtResource("3_063s7")
 player = NodePath("../../../..")
 tweetText = NodePath("../../TweetEdit")
 API = NodePath("../../../../../API")
+
+[node name="Animated" parent="Player" instance=ExtResource("7_l1adc")]
+position = Vector2(-15, -88)
+scale = Vector2(0.2, 0.2)
 
 [node name="Enemy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("player")]
 position = Vector2(0, 200)
