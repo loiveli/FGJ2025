@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0hqc840v44i1"]
+
+[ext_resource type="Script" path="res://people/temporary_person.gd" id="1_pp8di"]
+[ext_resource type="Texture2D" uid="uid://f023arbjrx7d" path="res://assets/alien.png" id="2_uk4uj"]
+
+[node name="TemporaryPerson" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_pp8di")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_uk4uj")
