@@ -27,7 +27,7 @@ func _input(event: InputEvent) -> void:
 		if event is InputEventWithModifiers and event is InputEventKey and event.is_pressed():
 			if event.keycode == KEY_ENTER and !event.shift_pressed:
 				print(typeof(event))
-				tweetButton.send_tweet(text)
+				tweetButton.sendTweet(text)
 				get_viewport().set_input_as_handled()
 				
 			elif event.keycode == KEY_ENTER:
@@ -35,5 +35,5 @@ func _input(event: InputEvent) -> void:
 				get_viewport().set_input_as_handled()
 				
 
-func _on_tweet_button_tweet_sent(text: String) -> void:
+func _on_tweet_button_tweet_sent(idNum,text: String) -> void:
 	clear()

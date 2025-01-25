@@ -20,11 +20,12 @@ events = [SubResource("InputEventKey_oxstc")]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("tweetButton")]
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("followerLabel", "tweetButton")]
 process_priority = 1
 process_physics_priority = 1
 position = Vector2(500, 250)
 script = ExtResource("2_43n2e")
+followerLabel = NodePath("TwitterUI/TwitterFollowers")
 tweetButton = NodePath("TwitterUI/NewTweet/VBoxContainer/TweetButton")
 
 [node name="PlayerCollider" type="CollisionPolygon2D" parent="Player"]
@@ -41,6 +42,10 @@ offset_bottom = 307.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 2
+
+[node name="TwitterFollowers" type="Label" parent="Player/TwitterUI"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 
 [node name="TweetList" type="VBoxContainer" parent="Player/TwitterUI"]
 clip_contents = true
@@ -124,5 +129,6 @@ bubble = "Movies"
 [connection signal="text_changed" from="Player/TwitterUI/NewTweet/TweetEdit" to="Player/TwitterUI/NewTweet/TweetEdit" method="_on_text_changed"]
 [connection signal="text_changed" from="Player/TwitterUI/NewTweet/TweetEdit" to="Player/TwitterUI/NewTweet/VBoxContainer/TweetCharacterLabel" method="_on_tweet_edit_text_changed"]
 [connection signal="pressed" from="Player/TwitterUI/NewTweet/VBoxContainer/TweetButton" to="Player/TwitterUI/NewTweet/VBoxContainer/TweetButton" method="_on_pressed"]
+[connection signal="tweet_received" from="Player/TwitterUI/NewTweet/VBoxContainer/TweetButton" to="Player/TwitterUI/TweetList" method="_on_update_tweet"]
 [connection signal="tweet_sent" from="Player/TwitterUI/NewTweet/VBoxContainer/TweetButton" to="Player/TwitterUI/TweetList" method="_on_add_tweet"]
 [connection signal="tweet_sent" from="Player/TwitterUI/NewTweet/VBoxContainer/TweetButton" to="Player/TwitterUI/NewTweet/TweetEdit" method="_on_tweet_button_tweet_sent"]

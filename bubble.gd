@@ -1,5 +1,11 @@
 extends StaticBody2D
 
+var followers: int = 0:
+	set(value):
+		followers = value
+		scale = Vector2(1 + (followers / 20.0),1 + (followers / 20.0))
+
+
 var permanent_person_scene = preload("res://people/permanent_person.tscn")
 var temporary_person_scene = preload("res://people/temporary_person.tscn")
 var heart_notification = preload("res://heart_notification.tscn")
