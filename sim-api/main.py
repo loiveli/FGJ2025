@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Header, HTTPException
+import numpy as np
 
 from transformers import BitsAndBytesConfig
 from transformers import AutoModel
@@ -96,10 +97,12 @@ async def get_sim(user_text: str = Header(), new_bubbles: Annotated[str | None, 
         new_similarities = cosine_similarity(user_text_embedding, batch, dim=1)
         similarities[i : i+max_batch_size] = new_similarities
 
-    similarities = list(similarities.cpu().tolist())
+    similarities = similarities.cpu().numpy().astype(float)
 
-    result = [{"bubble": a, "value": b} for a, b in zip(state.bubbles, similarities)]
-    return result
+    similarity_order = np.flip(np.argsort(similarities)).tolist()
+    bubble_items = np.array([{"bubble": a, "value": b} for a, b in zip(state.bubbles, similarities)])
+
+    return bubble_items[similarity_order].tolist()
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000, reload=False)
