@@ -14,5 +14,9 @@ func _on_add_tweet(id,text):
 
 func _on_update_tweet(id, result):
 	var tweetObject = get_children().filter(func(node):return node.tweetID == id)[0]
-
+	var followers = tweetObject.tweetText.length()
+	for value in result:
+		if value > 0.3:
+			followers *= value
+	
 	tweetObject.updateStats(result[0].value * randi_range(100,1000),result[1].value * randi_range(100,1000))
