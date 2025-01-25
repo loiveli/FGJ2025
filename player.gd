@@ -53,9 +53,9 @@ func _on_tweet_received(text, result):
 		bubbles[similarity.bubble].new_notification(similarity.value)
 	targetPosition = position+ moveVector
 	
-	if targetPosition != self.position:
-		self.animation_player.scale.x = -1 if targetPosition.x < self.position.x else 1
-		self.animation_player.play("walk")
+	#if targetPosition != self.position:
+	#	self.animation_player.scale.x = -1 if targetPosition.x < self.position.x else 1
+	#	self.animation_player.play("walk")
 	
 func _draw():
 	draw_circle((targetPosition - global_position), 10, Color("BLUE"))
