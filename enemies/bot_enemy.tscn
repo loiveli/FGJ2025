@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cho51emc8kfuh"]
+
+[ext_resource type="Texture2D" uid="uid://basw30y27g5yo" path="res://assets/robot.png" id="1_igjcq"]
+[ext_resource type="Script" path="res://enemies/bot_enemy.gd" id="1_n8t6m"]
+
+[node name="BotEnemy" type="CharacterBody2D"]
+script = ExtResource("1_n8t6m")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("1_igjcq")
