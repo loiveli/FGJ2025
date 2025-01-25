@@ -24,4 +24,5 @@ script = ExtResource("2_sg3al")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="PersonTimer" type="Timer" parent="."]
+wait_time = 0.2
 autostart = true
