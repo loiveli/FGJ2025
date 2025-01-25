@@ -1,72 +1,48 @@
-[gd_scene load_steps=6 format=3 uid="uid://bponl4tqx263q"]
+[gd_scene load_steps=4 format=3 uid="uid://bponl4tqx263q"]
 
 [ext_resource type="Texture2D" uid="uid://bpabpnwc0e5yf" path="res://icon.svg" id="1_1ctoo"]
 [ext_resource type="Script" path="res://player.gd" id="2_43n2e"]
-[ext_resource type="Script" path="res://button.gd" id="3_jvblk"]
-[ext_resource type="Script" path="res://label.gd" id="3_wmvpq"]
-[ext_resource type="Script" path="res://y_label.gd" id="4_rtpqk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8g1rm"]
+radius = 53.0094
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Player" type="RigidBody2D" parent="."]
+[node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(500, 250)
-gravity_scale = 0.0
-linear_damp = 25.0
-angular_damp = 25.0
 script = ExtResource("2_43n2e")
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
+[node name="PlayerSprite" type="Sprite2D" parent="Player"]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_1ctoo")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
+[node name="PlayerCollider" type="CollisionPolygon2D" parent="Player"]
 scale = Vector2(0.25, 0.25)
 polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64, 59.6, 64, 63.9, 59, 64, -61.1)
 
-[node name="GridContainer" type="GridContainer" parent="."]
-offset_right = 100.0
-offset_bottom = 120.0
+[node name="DebugUI" type="GridContainer" parent="."]
+offset_left = 886.0
+offset_top = -3.0
+offset_right = 1154.0
+offset_bottom = 653.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GridContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="DebugUI"]
 layout_mode = 2
 
-[node name="HSlider" type="HSlider" parent="GridContainer/HBoxContainer"]
-custom_minimum_size = Vector2(100, 0)
+[node name="TextEdit" type="TextEdit" parent="DebugUI/HBoxContainer"]
+custom_minimum_size = Vector2(175, 100)
 layout_mode = 2
-min_value = -1.0
-max_value = 1.0
-step = 0.1
+placeholder_text = "Write tweet here"
 
-[node name="XLabel" type="Label" parent="GridContainer/HBoxContainer"]
+[node name="Button" type="Button" parent="DebugUI/HBoxContainer"]
+custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
-script = ExtResource("3_wmvpq")
+text = "Tweet"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GridContainer"]
-layout_mode = 2
+[node name="Bubble2" type="StaticBody2D" parent="."]
 
-[node name="VSlider" type="VSlider" parent="GridContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-min_value = -1.0
-max_value = 1.0
-step = 0.1
-
-[node name="YLabel" type="Label" parent="GridContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-script = ExtResource("4_rtpqk")
-
-[node name="Button" type="Button" parent="GridContainer/VBoxContainer"]
-custom_minimum_size = Vector2(20, 20)
-layout_mode = 2
-size_flags_horizontal = 0
-script = ExtResource("3_jvblk")
-
-[connection signal="value_changed" from="GridContainer/HBoxContainer/HSlider" to="GridContainer/VBoxContainer/Button" method="_on_h_slider_value_changed"]
-[connection signal="value_changed" from="GridContainer/HBoxContainer/HSlider" to="GridContainer/HBoxContainer/XLabel" method="_on_h_slider_value_changed"]
-[connection signal="value_changed" from="GridContainer/VBoxContainer/VSlider" to="GridContainer/VBoxContainer/Button" method="_on_v_slider_value_changed"]
-[connection signal="value_changed" from="GridContainer/VBoxContainer/VSlider" to="GridContainer/VBoxContainer/YLabel" method="_on_v_slider_value_changed"]
-[connection signal="pressed" from="GridContainer/VBoxContainer/Button" to="GridContainer/VBoxContainer/Button" method="_on_pressed"]
-[connection signal="send_impulse" from="GridContainer/VBoxContainer/Button" to="Player" method="_on_button_send_impulse"]
+[node name="BubbleCollider" type="CollisionShape2D" parent="Bubble2"]
+position = Vector2(522, 49)
+shape = SubResource("CircleShape2D_8g1rm")
