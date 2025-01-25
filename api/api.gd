@@ -17,13 +17,13 @@ func similarity_from_dict(d) -> Similarity:
 
 @onready
 var http: HTTPRequest = $HTTPRequest
-const API_URL = "http://localhost:9000/similarity"
+const API_URL = "http://localhost:8000/sim"
 
 
 func _ready() -> void:
 	http.request_completed.connect(_on_request_completed)
 
-func get_similarity(input: String, bubbles: Array[String] = []):
+func get_similarity(input: String, bubbles: Array[String] = ["Rock","Sports","Memes"]):
 	var headers: Array[String] = ["user-text: %s" % input]
 	if bubbles.size() > 0:
 		headers.append("new-bubbles: %s" % ",".join(bubbles))
@@ -45,6 +45,7 @@ func _on_request_completed(result, response_code, headers, body):
 
 func _parse_response_json(body) -> Array[Similarity]:
 	var json = JSON.new()
+	print(body)
 	var parse_result = json.parse(body)
 	
 	var result = []
