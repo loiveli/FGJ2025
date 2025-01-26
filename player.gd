@@ -3,6 +3,7 @@ extends CharacterBody2D
 var targetPosition: Vector2 = position
 var speed: int = 25
 @export var followerLabel: Label
+@export var sanitylabel: Label
 var bubbles: Dictionary
 var followers: int:
 	set(value):
@@ -10,6 +11,10 @@ var followers: int:
 		speed = 25+log(followers)*25
 		followerLabel.text = "Followers: " + str(followers)
 	
+var sanity: float = 100:
+	set(value):
+		sanity = value
+		sanitylabel.text = "Sanity: "+ str(sanity)
 
 @onready
 var animation_player: AnimationPlayer = $Animated/AnimationPlayer
@@ -36,6 +41,7 @@ func _physics_process(delta: float) -> void:
 	if (position - targetPosition).length() > speed * delta:
 		move = position.direction_to(targetPosition) * speed * delta
 	else:
+		sanity -= 0.1
 		position = targetPosition
 		self.animation_player.stop(false)
 	var collision = move_and_collide(move)

@@ -22,13 +22,14 @@ events = [SubResource("InputEventKey_oxstc")]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("followerLabel", "tweetButton")]
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("followerLabel", "sanitylabel", "tweetButton")]
 process_priority = 1
 process_physics_priority = 1
 position = Vector2(500, 250)
 script = ExtResource("2_43n2e")
-followerLabel = NodePath("Container/MarginContainer/TwitterUI/TwitterFollowers")
-tweetButton = NodePath("Container/MarginContainer/TwitterUI/NewTweet/VBoxContainer/TweetButton")
+followerLabel = NodePath("Phone/PhoneMargins/TwitterUI/HBoxContainer/TwitterFollowers")
+sanitylabel = NodePath("Phone/PhoneMargins/TwitterUI/HBoxContainer/Sanity")
+tweetButton = NodePath("Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetButton")
 
 [node name="PlayerCollider" type="CollisionPolygon2D" parent="Player"]
 scale = Vector2(0.25, 0.25)
@@ -36,36 +37,44 @@ polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
-[node name="Container" type="MarginContainer" parent="Player"]
-offset_left = 500.0
+[node name="Phone" type="MarginContainer" parent="Player"]
+offset_left = 400.0
 offset_top = -450.0
-offset_right = 800.0
-offset_bottom = 450.0
+offset_right = 700.0
+offset_bottom = 460.0
 
-[node name="TextureRect" type="TextureRect" parent="Player/Container"]
+[node name="PhoneTexture" type="TextureRect" parent="Player/Phone"]
 layout_mode = 2
 texture = ExtResource("2_b5mc6")
 expand_mode = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Player/Container"]
+[node name="PhoneMargins" type="MarginContainer" parent="Player/Phone"]
 layout_mode = 2
 theme_override_constants/margin_left = 35
 theme_override_constants/margin_top = 60
 theme_override_constants/margin_right = 35
 theme_override_constants/margin_bottom = 100
 
-[node name="TwitterUI" type="VBoxContainer" parent="Player/Container/MarginContainer"]
+[node name="TwitterUI" type="VBoxContainer" parent="Player/Phone/PhoneMargins"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 2
 
-[node name="TwitterFollowers" type="Label" parent="Player/Container/MarginContainer/TwitterUI"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Player/Phone/PhoneMargins/TwitterUI"]
+layout_mode = 2
+
+[node name="TwitterFollowers" type="Label" parent="Player/Phone/PhoneMargins/TwitterUI/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Followers 100"
 
-[node name="TweetFeed" type="ScrollContainer" parent="Player/Container/MarginContainer/TwitterUI"]
+[node name="Sanity" type="Label" parent="Player/Phone/PhoneMargins/TwitterUI/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Sanity: 100"
+
+[node name="TweetFeed" type="ScrollContainer" parent="Player/Phone/PhoneMargins/TwitterUI"]
 custom_minimum_size = Vector2(0, 550)
 layout_mode = 2
 follow_focus = true
@@ -73,22 +82,22 @@ horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 script = ExtResource("2_5e6nj")
 
-[node name="TweetList" type="VBoxContainer" parent="Player/Container/MarginContainer/TwitterUI/TweetFeed"]
+[node name="TweetList" type="VBoxContainer" parent="Player/Phone/PhoneMargins/TwitterUI/TweetFeed"]
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("3_fxa6y")
 
-[node name="HSeparator" type="HSeparator" parent="Player/Container/MarginContainer/TwitterUI"]
+[node name="HSeparator" type="HSeparator" parent="Player/Phone/PhoneMargins/TwitterUI"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_a1a0a")
 
-[node name="NewTweet" type="VBoxContainer" parent="Player/Container/MarginContainer/TwitterUI"]
+[node name="NewTweet" type="VBoxContainer" parent="Player/Phone/PhoneMargins/TwitterUI"]
 layout_mode = 2
 
-[node name="TweetEdit" type="TextEdit" parent="Player/Container/MarginContainer/TwitterUI/NewTweet" node_paths=PackedStringArray("tweetButton")]
+[node name="TweetEdit" type="TextEdit" parent="Player/Phone/PhoneMargins/TwitterUI/NewTweet" node_paths=PackedStringArray("tweetButton")]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_colors/background_color = Color(0.968627, 0.968627, 0.968627, 1)
@@ -100,10 +109,10 @@ wrap_mode = 1
 script = ExtResource("3_vcubs")
 tweetButton = NodePath("../VBoxContainer/TweetButton")
 
-[node name="VBoxContainer" type="HBoxContainer" parent="Player/Container/MarginContainer/TwitterUI/NewTweet"]
+[node name="VBoxContainer" type="HBoxContainer" parent="Player/Phone/PhoneMargins/TwitterUI/NewTweet"]
 layout_mode = 2
 
-[node name="TweetButton" type="Button" parent="Player/Container/MarginContainer/TwitterUI/NewTweet/VBoxContainer" node_paths=PackedStringArray("player", "tweetText", "API")]
+[node name="TweetButton" type="Button" parent="Player/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer" node_paths=PackedStringArray("player", "tweetText", "API")]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -115,7 +124,7 @@ player = NodePath("../../../../../..")
 tweetText = NodePath("../../TweetEdit")
 API = NodePath("../../../../../../../API")
 
-[node name="TweetCharacterLabel" type="Label" parent="Player/Container/MarginContainer/TwitterUI/NewTweet/VBoxContainer" node_paths=PackedStringArray("tweetEdit")]
+[node name="TweetCharacterLabel" type="Label" parent="Player/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer" node_paths=PackedStringArray("tweetEdit")]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -155,9 +164,9 @@ bubble = "Rock"
 position = Vector2(-178, 484)
 bubble = "Movies"
 
-[connection signal="text_changed" from="Player/Container/MarginContainer/TwitterUI/NewTweet/TweetEdit" to="Player/Container/MarginContainer/TwitterUI/NewTweet/TweetEdit" method="_on_text_changed"]
-[connection signal="text_changed" from="Player/Container/MarginContainer/TwitterUI/NewTweet/TweetEdit" to="Player/Container/MarginContainer/TwitterUI/NewTweet/VBoxContainer/TweetCharacterLabel" method="_on_tweet_edit_text_changed"]
-[connection signal="pressed" from="Player/Container/MarginContainer/TwitterUI/NewTweet/VBoxContainer/TweetButton" to="Player/Container/MarginContainer/TwitterUI/NewTweet/VBoxContainer/TweetButton" method="_on_pressed"]
-[connection signal="tweet_received" from="Player/Container/MarginContainer/TwitterUI/NewTweet/VBoxContainer/TweetButton" to="Player/Container/MarginContainer/TwitterUI/TweetFeed/TweetList" method="_on_update_tweet"]
-[connection signal="tweet_sent" from="Player/Container/MarginContainer/TwitterUI/NewTweet/VBoxContainer/TweetButton" to="Player/Container/MarginContainer/TwitterUI/TweetFeed/TweetList" method="_on_add_tweet"]
-[connection signal="tweet_sent" from="Player/Container/MarginContainer/TwitterUI/NewTweet/VBoxContainer/TweetButton" to="Player/Container/MarginContainer/TwitterUI/NewTweet/TweetEdit" method="_on_tweet_button_tweet_sent"]
+[connection signal="text_changed" from="Player/Phone/PhoneMargins/TwitterUI/NewTweet/TweetEdit" to="Player/Phone/PhoneMargins/TwitterUI/NewTweet/TweetEdit" method="_on_text_changed"]
+[connection signal="text_changed" from="Player/Phone/PhoneMargins/TwitterUI/NewTweet/TweetEdit" to="Player/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetCharacterLabel" method="_on_tweet_edit_text_changed"]
+[connection signal="pressed" from="Player/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetButton" to="Player/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetButton" method="_on_pressed"]
+[connection signal="tweet_received" from="Player/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetButton" to="Player/Phone/PhoneMargins/TwitterUI/TweetFeed/TweetList" method="_on_update_tweet"]
+[connection signal="tweet_sent" from="Player/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetButton" to="Player/Phone/PhoneMargins/TwitterUI/TweetFeed/TweetList" method="_on_add_tweet"]
+[connection signal="tweet_sent" from="Player/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetButton" to="Player/Phone/PhoneMargins/TwitterUI/NewTweet/TweetEdit" method="_on_tweet_button_tweet_sent"]
