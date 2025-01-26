@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dji37qm3ocvmc"]
+[gd_scene load_steps=3 format=3 uid="uid://dji37qm3ocvmc"]
 
 [ext_resource type="Script" path="res://tweet_container.gd" id="1_ni4l5"]
+[ext_resource type="Texture2D" uid="uid://owaqu8ge7enj" path="res://assets/heart.png" id="2_mvevm"]
 
 [node name="TweetContainer" type="VBoxContainer" node_paths=PackedStringArray("tweetTextLabel", "tweetLikesLabel", "tweetRetweetLabel")]
 custom_minimum_size = Vector2(0, 50)
@@ -17,6 +18,11 @@ autowrap_mode = 3
 
 [node name="TweetStats" type="HBoxContainer" parent="."]
 layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="TweetStats"]
+layout_mode = 2
+texture = ExtResource("2_mvevm")
+expand_mode = 2
 
 [node name="TweetLikes" type="Label" parent="TweetStats"]
 layout_mode = 2
