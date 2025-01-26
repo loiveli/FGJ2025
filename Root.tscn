@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bponl4tqx263q"]
+[gd_scene load_steps=16 format=3 uid="uid://bponl4tqx263q"]
 
 [ext_resource type="Script" path="res://tweet_feed.gd" id="2_5e6nj"]
 [ext_resource type="Script" path="res://player.gd" id="2_43n2e"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://tweet_character_label.gd" id="4_lodnv"]
 [ext_resource type="PackedScene" uid="uid://dfr54ojd8lgxj" path="res://api/api.tscn" id="4_vjfwk"]
 [ext_resource type="PackedScene" uid="uid://dj5w16egv7oge" path="res://player_animation.tscn" id="7_l1adc"]
+[ext_resource type="Script" path="res://meme_parent.gd" id="12_rv543"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a1a0a"]
 
@@ -164,6 +165,7 @@ position = Vector2(-178, 484)
 bubble = "Movies"
 
 [node name="MemeParent" type="Node2D" parent="."]
+script = ExtResource("12_rv543")
 
 [connection signal="text_changed" from="Player/Phone/PhoneMargins/TwitterUI/NewTweet/TweetEdit" to="Player/Phone/PhoneMargins/TwitterUI/NewTweet/TweetEdit" method="_on_text_changed"]
 [connection signal="text_changed" from="Player/Phone/PhoneMargins/TwitterUI/NewTweet/TweetEdit" to="Player/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetCharacterLabel" method="_on_tweet_edit_text_changed"]

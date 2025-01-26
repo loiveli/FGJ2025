@@ -13,7 +13,7 @@ var followers: int:
 	
 var sanity: float = 100:
 	set(value):
-		sanity = value
+		sanity = clamp(value,0,10)
 		sanityBar.sanity = value
 
 @onready
@@ -56,6 +56,9 @@ func _physics_process(delta: float) -> void:
 			position = Vector2(0,0)
 			targetPosition = position
 			#GAMEOVER
+		elif collider.collisionType == "MEME":
+			sanity += 10
+			collider.resetPosition()
 
 
 
