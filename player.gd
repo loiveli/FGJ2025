@@ -1,12 +1,13 @@
 extends CharacterBody2D
 
 var targetPosition: Vector2 = position
-const speed: int = 25
+var speed: int = 25
 @export var followerLabel: Label
 var bubbles: Dictionary
 var followers: int:
 	set(value):
 		followers = value
+		speed = 25+(followers/20)
 		followerLabel.text = "Followers: " + str(followers)
 	
 
