@@ -163,6 +163,8 @@ bubble = "Rock"
 position = Vector2(-178, 484)
 bubble = "Movies"
 
+[node name="MemeParent" type="Node2D" parent="."]
+
 [connection signal="text_changed" from="Player/Phone/PhoneMargins/TwitterUI/NewTweet/TweetEdit" to="Player/Phone/PhoneMargins/TwitterUI/NewTweet/TweetEdit" method="_on_text_changed"]
 [connection signal="text_changed" from="Player/Phone/PhoneMargins/TwitterUI/NewTweet/TweetEdit" to="Player/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetCharacterLabel" method="_on_tweet_edit_text_changed"]
 [connection signal="pressed" from="Player/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetButton" to="Player/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetButton" method="_on_pressed"]

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpjupxo0gyaia"]
+
+[ext_resource type="Script" path="res://sanity_up.gd" id="1_dp188"]
+[ext_resource type="Texture2D" uid="uid://bpabpnwc0e5yf" path="res://icon.svg" id="2_6cru7"]
+
+[node name="SanityUp" type="StaticBody2D"]
+script = ExtResource("1_dp188")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(0.2, 0.2)
+polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64, 59.6, 64, 63.9, 59, 64, -61.1)
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionPolygon2D"]
+texture = ExtResource("2_6cru7")

@@ -28,7 +28,7 @@ var animated_original_scale_x: float = animated.scale.x
 func _ready():
 	followers = 10
 	tweetButton.tweet_received.connect(_on_tweet_received)
-	var childNodes = $"..".get_children().filter(func(child): return child is StaticBody2D)
+	var childNodes = $"..".get_children().filter(func(child): return child is StaticBody2D).filter(func(node): return node.collisionType == "BUBBLE")
 	for node in childNodes:
 		bubbles[node.bubble] = node
 	
@@ -45,6 +45,18 @@ func _physics_process(delta: float) -> void:
 		position = targetPosition
 		self.animation_player.stop(false)
 	var collision = move_and_collide(move)
+	if collision:
+		var collider = collision.get_collider()
+		if collider.collisionType == "HUMAN":
+			sanity -=1
+			followers += 5
+			collider.queue_free()
+		elif collider.collisionType == "BUBBLE":
+			print("Gameover")
+			position = Vector2(0,0)
+			targetPosition = position
+			#GAMEOVER
+
 
 
 

@@ -2,7 +2,7 @@ extends RigidBody2D
 
 
 
-var collisionType = "BUBBLE"
+var collisionType = "HUMAN"
 
 func _ready():
 	pass
