@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://bponl4tqx263q"]
+[gd_scene load_steps=16 format=3 uid="uid://bponl4tqx263q"]
 
+[ext_resource type="Script" path="res://root.gd" id="1_td513"]
 [ext_resource type="Script" path="res://tweet_feed.gd" id="2_5e6nj"]
 [ext_resource type="Script" path="res://player.gd" id="2_43n2e"]
 [ext_resource type="Texture2D" uid="uid://cut1wphvb7rgo" path="res://assets/phone_new.png" id="2_b5mc6"]
@@ -22,6 +23,7 @@ keycode = 4194309
 events = [SubResource("InputEventKey_oxstc")]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_td513")
 
 [node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("followerLabel", "sanityBar", "tweetButton")]
 process_priority = 1
@@ -44,9 +46,9 @@ polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64
 position = Vector2(-25, -103)
 
 [node name="Phone" type="MarginContainer" parent="Player"]
-offset_left = 400.0
+offset_left = 500.0
 offset_top = -450.0
-offset_right = 700.0
+offset_right = 800.0
 offset_bottom = 460.0
 
 [node name="PhoneTexture" type="TextureRect" parent="Player/Phone"]
@@ -137,33 +139,52 @@ tweetEdit = NodePath("../../TweetEdit")
 [node name="Animated" parent="Player" instance=ExtResource("7_l1adc")]
 position = Vector2(-14, -93)
 
-[node name="SportsBubble" parent="." instance=ExtResource("4_1fda2")]
-position = Vector2(107, 67)
-bubble = "NBA"
+[node name="FinlandBubble" parent="." instance=ExtResource("4_1fda2")]
+position = Vector2(2280, 1398)
+bubble = "Finland"
 
-[node name="RockBubble" parent="." instance=ExtResource("4_1fda2")]
-position = Vector2(1071, 51)
-bubble = "Nascar"
+[node name="AIBubble" parent="." instance=ExtResource("4_1fda2")]
+position = Vector2(2743, 561)
+bubble = "AI"
+
+[node name="PoliticsBubble" parent="." instance=ExtResource("4_1fda2")]
+position = Vector2(149, -516)
+bubble = "Politics"
+
+[node name="SportsBubble" parent="." instance=ExtResource("4_1fda2")]
+position = Vector2(1484, 276)
+
+[node name="CarsBubble" parent="." instance=ExtResource("4_1fda2")]
+position = Vector2(1554, -484)
+bubble = "Cars"
 
 [node name="MemeBubble" parent="." instance=ExtResource("4_1fda2")]
-position = Vector2(1490, 569)
-bubble = "Premier league"
+position = Vector2(2322, -308)
+bubble = "Memes"
+
+[node name="GamesBubble" parent="." instance=ExtResource("4_1fda2")]
+position = Vector2(27, 245)
+bubble = "Videogames"
+
+[node name="MusicBubble" parent="." instance=ExtResource("4_1fda2")]
+position = Vector2(226, 1432)
+bubble = "Music"
+
+[node name="USABubble" parent="." instance=ExtResource("4_1fda2")]
+position = Vector2(-1071, 1578)
+bubble = "USA"
+
+[node name="TravelBubble" parent="." instance=ExtResource("4_1fda2")]
+position = Vector2(-899, -431)
+bubble = "Travel"
+
+[node name="MovieBubble" parent="." instance=ExtResource("4_1fda2")]
+position = Vector2(-642, 662)
+bubble = "Movies"
 
 [node name="API" parent="." instance=ExtResource("4_vjfwk")]
 position = Vector2(-35, 207)
 RETURN_HARDCODED_VALUE = true
-
-[node name="MemeBubble4" parent="." instance=ExtResource("4_1fda2")]
-position = Vector2(879, 567)
-bubble = "Games"
-
-[node name="MemeBubble2" parent="." instance=ExtResource("4_1fda2")]
-position = Vector2(349, 945)
-bubble = "Rock"
-
-[node name="MemeBubble3" parent="." instance=ExtResource("4_1fda2")]
-position = Vector2(-178, 484)
-bubble = "Movies"
 
 [connection signal="text_changed" from="Player/Phone/PhoneMargins/TwitterUI/NewTweet/TweetEdit" to="Player/Phone/PhoneMargins/TwitterUI/NewTweet/TweetEdit" method="_on_text_changed"]
 [connection signal="text_changed" from="Player/Phone/PhoneMargins/TwitterUI/NewTweet/TweetEdit" to="Player/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetCharacterLabel" method="_on_tweet_edit_text_changed"]

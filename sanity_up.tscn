@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpjupxo0gyaia"]
+
+[ext_resource type="Script" path="res://sanity_up.gd" id="1_dp188"]
+[ext_resource type="Texture2D" uid="uid://bk1vatsao7orh" path="res://assets/exhale_coin.png" id="2_dofm4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u7bmp"]
+radius = 11.0
+
+[node name="SanityUp" type="StaticBody2D"]
+script = ExtResource("1_dp188")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_u7bmp")
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
+position = Vector2(0, 0.875001)
+scale = Vector2(0.045, 0.0485)
+texture = ExtResource("2_dofm4")

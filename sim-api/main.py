@@ -3,7 +3,7 @@ import numpy as np
 
 from transformers import BitsAndBytesConfig
 from transformers import AutoModel
-
+import multiprocessing
 from torch.nn.functional import cosine_similarity
 
 from typing import Annotated
@@ -105,4 +105,5 @@ async def get_sim(user_text: str = Header(), new_bubbles: Annotated[str | None, 
     return bubble_items[similarity_order].tolist()
 
 if __name__ == "__main__":
+    multiprocessing.freeze_support()
     uvicorn.run(app, host="127.0.0.1", port=8000, reload=False)

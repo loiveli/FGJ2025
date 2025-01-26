@@ -1,5 +1,7 @@
 extends StaticBody2D
 
+var collisionType = "BUBBLE"
+
 var followers: int = 0:
 	set(value):
 		followers = value
