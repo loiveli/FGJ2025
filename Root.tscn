@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://bponl4tqx263q"]
+[gd_scene load_steps=15 format=3 uid="uid://bponl4tqx263q"]
 
 [ext_resource type="Script" path="res://tweet_feed.gd" id="2_5e6nj"]
 [ext_resource type="Script" path="res://player.gd" id="2_43n2e"]
 [ext_resource type="Texture2D" uid="uid://cut1wphvb7rgo" path="res://assets/phone_new.png" id="2_b5mc6"]
 [ext_resource type="Script" path="res://tweet.gd" id="3_063s7"]
 [ext_resource type="Script" path="res://tweet_list.gd" id="3_fxa6y"]
+[ext_resource type="PackedScene" uid="uid://brlcp183p4ufh" path="res://sanitybar.tscn" id="3_tgdsa"]
 [ext_resource type="Script" path="res://TweetEdit.gd" id="3_vcubs"]
 [ext_resource type="PackedScene" uid="uid://dglcxe3psg068" path="res://bubble.tscn" id="4_1fda2"]
 [ext_resource type="Script" path="res://tweet_character_label.gd" id="4_lodnv"]
@@ -22,13 +23,13 @@ events = [SubResource("InputEventKey_oxstc")]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("followerLabel", "sanitylabel", "tweetButton")]
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("followerLabel", "sanityBar", "tweetButton")]
 process_priority = 1
 process_physics_priority = 1
 position = Vector2(500, 250)
 script = ExtResource("2_43n2e")
 followerLabel = NodePath("Phone/PhoneMargins/TwitterUI/HBoxContainer/TwitterFollowers")
-sanitylabel = NodePath("Phone/PhoneMargins/TwitterUI/HBoxContainer/Sanity")
+sanityBar = NodePath("Sanitybar")
 tweetButton = NodePath("Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetButton")
 
 [node name="PlayerCollider" type="CollisionPolygon2D" parent="Player"]
@@ -36,6 +37,9 @@ scale = Vector2(0.25, 0.25)
 polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64, 59.6, 64, 63.9, 59, 64, -61.1)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="Sanitybar" parent="Player" instance=ExtResource("3_tgdsa")]
+position = Vector2(-25, -103)
 
 [node name="Phone" type="MarginContainer" parent="Player"]
 offset_left = 400.0
@@ -68,11 +72,6 @@ layout_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Followers 100"
-
-[node name="Sanity" type="Label" parent="Player/Phone/PhoneMargins/TwitterUI/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Sanity: 100"
 
 [node name="TweetFeed" type="ScrollContainer" parent="Player/Phone/PhoneMargins/TwitterUI"]
 custom_minimum_size = Vector2(0, 550)

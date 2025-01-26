@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+var collisionType = "BOT"
+
 var targetPosition: Vector2
 const SPEED = 30
 
@@ -19,5 +21,5 @@ func _physics_process(delta: float) -> void:
 		
 	var collision = move_and_collide(position.direction_to(targetPosition) * SPEED *delta)
 	if collision:
-		collision.get_collider().followers += 20
+		collision.get_collider().followers += collision.get_collider().followers*0.25
 		queue_free()

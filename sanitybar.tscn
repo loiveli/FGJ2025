@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bfcn8fww32qgf"]
+[gd_scene load_steps=5 format=3 uid="uid://brlcp183p4ufh"]
 
 [ext_resource type="Script" path="res://sanitybar.gd" id="1_54xuw"]
 [ext_resource type="Shader" path="res://sanitybar.gdshader" id="2_7vxqd"]
@@ -13,7 +13,9 @@ script = ExtResource("1_54xuw")
 sanity = 50.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color(0, 1, 0.00392157, 1)
 material = SubResource("ShaderMaterial_blobw")
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 51.0
+offset_bottom = 5.0
 texture = ExtResource("2_nmpci")
+expand_mode = 1

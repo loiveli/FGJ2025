@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+var collisionType = "TROLL"
 var targetPosition: Vector2
 const SPEED = 200
 @export var player: CharacterBody2D
@@ -13,10 +14,10 @@ func _physics_process(delta: float) -> void:
 		targetPosition = player.position
 	else:
 		queue_redraw()
-	var collision = move_and_collide(position.direction_to(targetPosition) * SPEED *delta)
-	if collision:
-		print(collision.get_collider())
-		collision.get_collider().followers -= 2
+	var collision = move_and_collide(position.direction_to(targetPosition) * SPEED *delta).get_collider()
+	if collision.collisionType == "PLAYER":
+		collision.sanity -= 10
+		
 		queue_free()
 
 func _draw():

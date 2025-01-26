@@ -3,7 +3,7 @@ extends CharacterBody2D
 var targetPosition: Vector2 = position
 var speed: int = 25
 @export var followerLabel: Label
-@export var sanitylabel: Label
+@export var sanityBar: Node2D
 var bubbles: Dictionary
 var followers: int:
 	set(value):
@@ -14,7 +14,7 @@ var followers: int:
 var sanity: float = 100:
 	set(value):
 		sanity = value
-		sanitylabel.text = "Sanity: "+ str(sanity)
+		sanityBar.sanity = value
 
 @onready
 var animation_player: AnimationPlayer = $Animated/AnimationPlayer
