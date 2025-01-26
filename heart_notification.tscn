@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c8cgnxgyutml0"]
 
-[ext_resource type="Texture2D" uid="uid://baj5wv7i3oeli" path="res://assets/heart.png" id="1_ydn1m"]
+[ext_resource type="Texture2D" uid="uid://owaqu8ge7enj" path="res://assets/heart.png" id="1_ydn1m"]
 [ext_resource type="Script" path="res://heart_notification.gd" id="2_k26i6"]
 
 [node name="HeartNotification" type="Sprite2D"]

@@ -5,12 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://cut1wphvb7rgo" path="res://assets/phone_new.png" id="2_b5mc6"]
 [ext_resource type="Script" path="res://tweet.gd" id="3_063s7"]
 [ext_resource type="Script" path="res://tweet_list.gd" id="3_fxa6y"]
-[ext_resource type="PackedScene" uid="uid://brlcp183p4ufh" path="res://sanitybar.tscn" id="3_tgdsa"]
+[ext_resource type="PackedScene" path="res://sanitybar.tscn" id="3_tgdsa"]
 [ext_resource type="Script" path="res://TweetEdit.gd" id="3_vcubs"]
 [ext_resource type="PackedScene" uid="uid://dglcxe3psg068" path="res://bubble.tscn" id="4_1fda2"]
 [ext_resource type="Script" path="res://tweet_character_label.gd" id="4_lodnv"]
 [ext_resource type="PackedScene" uid="uid://dfr54ojd8lgxj" path="res://api/api.tscn" id="4_vjfwk"]
-[ext_resource type="PackedScene" uid="uid://dj5w16egv7oge" path="res://player_animation.tscn" id="7_l1adc"]
+[ext_resource type="PackedScene" uid="uid://dsb27wfudse5n" path="res://player_animation.tscn" id="7_l1adc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a1a0a"]
 
@@ -27,6 +27,8 @@ events = [SubResource("InputEventKey_oxstc")]
 process_priority = 1
 process_physics_priority = 1
 position = Vector2(500, 250)
+collision_layer = 8
+collision_mask = 7
 script = ExtResource("2_43n2e")
 followerLabel = NodePath("Phone/PhoneMargins/TwitterUI/HBoxContainer/TwitterFollowers")
 sanityBar = NodePath("Sanitybar")

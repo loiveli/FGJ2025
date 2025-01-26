@@ -11,9 +11,10 @@ var max_person_distance = 90
 
 # Size limits at which each enemy starts spawning
 var bot_spawn_distance_threshold = 120
-var troll_spawn_distance_threshold = 200
+var troll_spawn_distance_threshold = 150
 
 var bot_enemy_scene = preload("res://enemies/bot_enemy.tscn")
+var troll_enemy_scene = preload("res://enemies/troll_enemy.tscn")
 var permanent_person_scene = preload("res://people/permanent_person.tscn")
 var temporary_person_scene = preload("res://people/temporary_person.tscn")
 var heart_notification = preload("res://heart_notification.tscn")
@@ -30,8 +31,9 @@ func _ready():
 	# Add timer that creates temporary people every now and then
 	$PersonTimer.connect("timeout", Callable(self, "_on_person_timer_timeout"))
 	
-	# Add (stochastic) timer that spawns bots if size is large enough
+	# Add (stochastic) timer that spawns enemies if size is large enough
 	_create_bot_timer()
+	_create_troll_timer()
 	
 	
 func _create_bot_timer():
@@ -46,6 +48,18 @@ func _create_bot_timer():
 	bot_spawn_timer.connect("timeout", Callable(self, "_on_bot_spawn_timer_timeout"))
 	bot_spawn_timer.start()
 	
+func _create_troll_timer():
+	var troll_spawn_timer := Timer.new()
+	var timer_mean = 60
+	var timer_delta = randf_range(-30, 30)
+	
+	troll_spawn_timer.wait_time = timer_mean + timer_delta
+	troll_spawn_timer.one_shot = true
+
+	add_child(troll_spawn_timer)
+	troll_spawn_timer.connect("timeout", Callable(self, "_on_troll_spawn_timer_timeout"))
+	troll_spawn_timer.start()
+
 
 func _on_bot_spawn_timer_timeout():
 	if max_person_distance >= bot_spawn_distance_threshold:
@@ -54,6 +68,14 @@ func _on_bot_spawn_timer_timeout():
 	
 	# Create a new timer (with a new duration)
 	_create_bot_timer()
+	
+func _on_troll_spawn_timer_timeout():
+	if max_person_distance >= troll_spawn_distance_threshold:
+		var new_troll_enemy = troll_enemy_scene.instantiate()
+		add_child(new_troll_enemy)
+	
+	# Create a new timer (with a new duration)
+	_create_troll_timer()
 
 func _on_death_timer_timeout():
 	queue_free()

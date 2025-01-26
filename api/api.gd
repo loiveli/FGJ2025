@@ -51,9 +51,8 @@ func get_similarity(input: String, bubbles: Array = []):
 		print("API error")
 
 func get_similarity_async(input, bubbles: Array = []):
-	if RETURN_HARDCODED_VALUE:
-		
-		return TEST_RESPONSES[randi_range(0,TEST_RESPONSES.size()-1)]
+	#if RETURN_HARDCODED_VALUE:
+	#	return TEST_RESPONSES[randi_range(0,TEST_RESPONSES.size()-1)]
 	
 	self.get_similarity(input, bubbles)
 	var response = await self.similarity_response
