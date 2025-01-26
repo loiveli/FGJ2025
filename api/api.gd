@@ -4,18 +4,18 @@ extends Node2D
 @export var RETURN_HARDCODED_VALUE = false
 var TEST_RESPONSES: Array = [[
 	Similarity.new(0.9, "Movies"),
-	Similarity.new(0.1, "Games")
+	Similarity.new(0.1, "Videogames")
 ],[
-	Similarity.new(0.9, "Games"),
-	Similarity.new(0.1, "NBA")
+	Similarity.new(0.9, "Videogames"),
+	Similarity.new(0.1, "Sports")
 ],[
-	Similarity.new(0.9, "NBA"),
-	Similarity.new(0.1, "Games")
+	Similarity.new(0.9, "Sports"),
+	Similarity.new(0.1, "Videogames")
 ],[
 	Similarity.new(0.7, "Movies"),
-	Similarity.new(0.6, "Games"),
-	Similarity.new(0.9, "Nascar"),
-	Similarity.new(0.5, "Rock")
+	Similarity.new(0.6, "Videogames"),
+	Similarity.new(0.9, "Cars"),
+	Similarity.new(0.5, "Music")
 ]]
 
 signal similarity_response(similarities: Array[Similarity])

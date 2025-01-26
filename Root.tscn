@@ -44,9 +44,9 @@ polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64
 position = Vector2(-25, -103)
 
 [node name="Phone" type="MarginContainer" parent="Player"]
-offset_left = 400.0
+offset_left = 500.0
 offset_top = -450.0
-offset_right = 700.0
+offset_right = 800.0
 offset_bottom = 460.0
 
 [node name="PhoneTexture" type="TextureRect" parent="Player/Phone"]

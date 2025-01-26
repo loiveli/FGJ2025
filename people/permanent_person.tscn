@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://people/permanent_person.gd" id="1_lxtgm"]
 [ext_resource type="Texture2D" uid="uid://f023arbjrx7d" path="res://assets/alien.png" id="2_v3fq5"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i72km"]
-radius = 7.0
-height = 36.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_lrikg"]
+radius = 6.08276
 
 [node name="PermanentPerson" type="RigidBody2D"]
 gravity_scale = 0.0
+lock_rotation = true
 script = ExtResource("1_lxtgm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -16,5 +16,5 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_v3fq5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2, 2)
-shape = SubResource("CapsuleShape2D_i72km")
+position = Vector2(-3, 18)
+shape = SubResource("CircleShape2D_lrikg")
