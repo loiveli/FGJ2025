@@ -19,4 +19,4 @@ func _on_update_tweet(id, result):
 		if sim.value > 0.3:
 			followers *= sim.value
 	
-	tweetObject.updateStats(result[0].value * randi_range(100,1000),result[1].value * randi_range(100,1000))
+	tweetObject.updateStats(result[0].value * randi_range(100,1000),result[1].value * randi_range(100,1000),followers)

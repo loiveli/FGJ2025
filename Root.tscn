@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bponl4tqx263q"]
+[gd_scene load_steps=14 format=3 uid="uid://bponl4tqx263q"]
 
 [ext_resource type="Script" path="res://tweet_feed.gd" id="2_5e6nj"]
 [ext_resource type="Script" path="res://player.gd" id="2_43n2e"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" path="res://tweet_character_label.gd" id="4_lodnv"]
 [ext_resource type="PackedScene" uid="uid://dfr54ojd8lgxj" path="res://api/api.tscn" id="4_vjfwk"]
 [ext_resource type="PackedScene" uid="uid://dj5w16egv7oge" path="res://player_animation.tscn" id="7_l1adc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a1a0a"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_oxstc"]
 device = -1
@@ -35,10 +37,10 @@ polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
 [node name="Container" type="MarginContainer" parent="Player"]
-offset_left = 560.0
-offset_top = -540.0
-offset_right = 960.0
-offset_bottom = 540.0
+offset_left = 500.0
+offset_top = -450.0
+offset_right = 800.0
+offset_bottom = 450.0
 
 [node name="TextureRect" type="TextureRect" parent="Player/Container"]
 layout_mode = 2
@@ -48,9 +50,9 @@ expand_mode = 1
 [node name="MarginContainer" type="MarginContainer" parent="Player/Container"]
 layout_mode = 2
 theme_override_constants/margin_left = 35
-theme_override_constants/margin_top = 80
+theme_override_constants/margin_top = 60
 theme_override_constants/margin_right = 35
-theme_override_constants/margin_bottom = 120
+theme_override_constants/margin_bottom = 100
 
 [node name="TwitterUI" type="VBoxContainer" parent="Player/Container/MarginContainer"]
 layout_mode = 2
@@ -61,11 +63,11 @@ alignment = 2
 [node name="TwitterFollowers" type="Label" parent="Player/Container/MarginContainer/TwitterUI"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Followers 100"
 
 [node name="TweetFeed" type="ScrollContainer" parent="Player/Container/MarginContainer/TwitterUI"]
-custom_minimum_size = Vector2(0, 450)
+custom_minimum_size = Vector2(0, 550)
 layout_mode = 2
-size_flags_vertical = 3
 follow_focus = true
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
@@ -78,11 +80,16 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("3_fxa6y")
 
+[node name="HSeparator" type="HSeparator" parent="Player/Container/MarginContainer/TwitterUI"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_a1a0a")
+
 [node name="NewTweet" type="VBoxContainer" parent="Player/Container/MarginContainer/TwitterUI"]
 layout_mode = 2
 
 [node name="TweetEdit" type="TextEdit" parent="Player/Container/MarginContainer/TwitterUI/NewTweet" node_paths=PackedStringArray("tweetButton")]
-custom_minimum_size = Vector2(200, 100)
+custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_colors/background_color = Color(0.968627, 0.968627, 0.968627, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)

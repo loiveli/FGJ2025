@@ -7,7 +7,7 @@ var bubbles: Dictionary
 var followers: int:
 	set(value):
 		followers = value
-		speed = 25+(followers/20)
+		speed = 25+log(followers)*25
 		followerLabel.text = "Followers: " + str(followers)
 	
 
@@ -39,8 +39,9 @@ func _physics_process(delta: float) -> void:
 		position = targetPosition
 		self.animation_player.stop(false)
 	var collision = move_and_collide(move)
-	if collision:
-		followers -=2
+
+
+
 func _on_tweet_received(text, result):
 	
 	var moveVector = Vector2(0, 0)

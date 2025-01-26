@@ -27,7 +27,14 @@ expand_mode = 2
 [node name="TweetLikes" type="Label" parent="TweetStats"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "100"
 
 [node name="TweetRetweet" type="Label" parent="TweetStats"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "100"
+
+[node name="TweetFollowers" type="Label" parent="TweetStats"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "100"
