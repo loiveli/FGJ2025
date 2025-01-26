@@ -39,7 +39,6 @@ scale = Vector2(0.25, 0.25)
 polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64, 59.6, 64, 63.9, 59, 64, -61.1)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(0.25, 0.25)
 
 [node name="Sanitybar" parent="Player" instance=ExtResource("3_tgdsa")]
 position = Vector2(-25, -103)
