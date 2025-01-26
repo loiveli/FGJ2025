@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cut1wphvb7rgo" path="res://assets/phone_new.png" id="2_b5mc6"]
 [ext_resource type="Script" path="res://tweet.gd" id="3_063s7"]
 [ext_resource type="Script" path="res://tweet_list.gd" id="3_fxa6y"]
-[ext_resource type="PackedScene" path="res://sanitybar.tscn" id="3_tgdsa"]
+[ext_resource type="PackedScene" uid="uid://brlcp183p4ufh" path="res://sanitybar.tscn" id="3_tgdsa"]
 [ext_resource type="Script" path="res://TweetEdit.gd" id="3_vcubs"]
 [ext_resource type="PackedScene" uid="uid://dglcxe3psg068" path="res://bubble.tscn" id="4_1fda2"]
 [ext_resource type="Script" path="res://tweet_character_label.gd" id="4_lodnv"]
@@ -85,12 +85,13 @@ horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 script = ExtResource("2_5e6nj")
 
-[node name="TweetList" type="VBoxContainer" parent="Player/Phone/PhoneMargins/TwitterUI/TweetFeed"]
+[node name="TweetList" type="VBoxContainer" parent="Player/Phone/PhoneMargins/TwitterUI/TweetFeed" node_paths=PackedStringArray("player")]
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("3_fxa6y")
+player = NodePath("../../../../..")
 
 [node name="HSeparator" type="HSeparator" parent="Player/Phone/PhoneMargins/TwitterUI"]
 custom_minimum_size = Vector2(0, 50)

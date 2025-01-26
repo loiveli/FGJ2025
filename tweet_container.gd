@@ -17,6 +17,7 @@ func updateTweet():
 		reach +=0.02
 	tweetLikesLabel.text = str(int(tweetLikes*reach))
 	tweetRetweetLabel.text = str(int(tweetRetweets*reach))
+	tweetFollowersLabel.text = str(int(tweetFollowers*reach))
 
 
 func _process(delta):
@@ -31,4 +32,5 @@ func initTweet(idNum,text: String,likes: int = randi_range(0,10 ), retweets: int
 	tweetID = idNum
 	tweetTextLabel.text = text
 	tweetLikes = likes
-	tweetLikes = retweets
+	tweetRetweets= retweets
+	tweetFollowers = 0

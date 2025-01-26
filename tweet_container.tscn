@@ -1,20 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://dji37qm3ocvmc"]
+[gd_scene load_steps=4 format=3 uid="uid://dji37qm3ocvmc"]
 
 [ext_resource type="Script" path="res://tweet_container.gd" id="1_ni4l5"]
 [ext_resource type="Texture2D" uid="uid://owaqu8ge7enj" path="res://assets/heart.png" id="2_mvevm"]
 
-[node name="TweetContainer" type="VBoxContainer" node_paths=PackedStringArray("tweetTextLabel", "tweetLikesLabel", "tweetRetweetLabel")]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rlhf8"]
+
+[node name="TweetContainer" type="VBoxContainer" node_paths=PackedStringArray("tweetTextLabel", "tweetLikesLabel", "tweetRetweetLabel", "tweetFollowersLabel")]
 custom_minimum_size = Vector2(0, 50)
 script = ExtResource("1_ni4l5")
 tweetTextLabel = NodePath("TweetText")
 tweetLikesLabel = NodePath("TweetStats/TweetLikes")
 tweetRetweetLabel = NodePath("TweetStats/TweetRetweet")
+tweetFollowersLabel = NodePath("TweetStats/TweetFollowers")
+
+[node name="HSeparator3" type="HSeparator" parent="."]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
 
 [node name="TweetText" type="Label" parent="."]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 autowrap_mode = 3
+
+[node name="HSeparator2" type="HSeparator" parent="."]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_rlhf8")
 
 [node name="TweetStats" type="HBoxContainer" parent="."]
 layout_mode = 2
