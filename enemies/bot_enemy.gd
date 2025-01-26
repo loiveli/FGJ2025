@@ -3,7 +3,7 @@ extends CharacterBody2D
 var collisionType = "BOT"
 
 var targetPosition: Vector2
-const SPEED = 30
+const SPEED = 200
 
 func _ready():
 	# Target is in the direction of the player but further away.
@@ -20,6 +20,6 @@ func _physics_process(delta: float) -> void:
 		queue_redraw()
 		
 	var collision = move_and_collide(position.direction_to(targetPosition) * SPEED *delta)
-	if collision:
+	if collision and collision.get_collider().collisionType == "PLAYER":
 		collision.get_collider().followers += collision.get_collider().followers*0.25
 		queue_free()

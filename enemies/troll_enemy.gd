@@ -4,7 +4,7 @@ var collisionType = "BOT"
 
 var targetPosition: Vector2
 var last_position: Vector2
-const SPEED = 10
+const SPEED = 50
 
 func _ready():
 	var player = get_node("/root/Node2D/Player")
@@ -17,6 +17,6 @@ func _physics_process(delta: float) -> void:
 	
 	var collision = move_and_collide(position.direction_to(targetPosition) * SPEED * delta)
 	
-	if collision:
+	if collision and collision.get_collider().collisionType == "PLAYER":
 		collision.get_collider().followers += collision.get_collider().followers*0.25
 		queue_free()

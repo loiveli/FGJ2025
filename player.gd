@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 var targetPosition: Vector2 = position
+var collisionType = "PLAYER"
 var speed: int = 25
 @export var followerLabel: Label
 @export var sanityBar: Node2D
@@ -8,12 +9,12 @@ var bubbles: Dictionary
 var followers: int:
 	set(value):
 		followers = value
-		speed = 25+log(followers)*25
+		speed = 100+log(followers)*25
 		followerLabel.text = "Followers: " + str(followers)
 	
 var sanity: float = 100:
 	set(value):
-		sanity = clamp(value,0,10)
+		sanity = clamp(value,0,100)
 		sanityBar.sanity = value
 
 @onready
@@ -41,7 +42,7 @@ func _physics_process(delta: float) -> void:
 	if (position - targetPosition).length() > speed * delta:
 		move = position.direction_to(targetPosition) * speed * delta
 	else:
-		sanity -= 0.1
+		sanity -= 0.0001 * followers
 		position = targetPosition
 		self.animation_player.stop(false)
 	var collision = move_and_collide(move)
@@ -53,9 +54,7 @@ func _physics_process(delta: float) -> void:
 			collider.queue_free()
 		elif collider.collisionType == "BUBBLE":
 			print("Gameover")
-			position = Vector2(0,0)
-			targetPosition = position
-			#GAMEOVER
+			sanity = 0
 		elif collider.collisionType == "MEME":
 			sanity += 10
 			collider.resetPosition()
