@@ -3,7 +3,7 @@ extends CharacterBody2D
 var collisionType = "BOT"
 
 var targetPosition: Vector2
-const SPEED = 200
+const SPEED = 150
 
 func _ready():
 	# Target is in the direction of the player but further away.
