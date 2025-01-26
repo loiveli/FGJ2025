@@ -4,5 +4,6 @@ bitsandbytes
 numpy
 uvicorn
 sentence_transformers
-xformers
+ninja
+
 
