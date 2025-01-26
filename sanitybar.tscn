@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfcn8fww32qgf"]
+
+[ext_resource type="Script" path="res://sanitybar.gd" id="1_54xuw"]
+[ext_resource type="Shader" path="res://sanitybar.gdshader" id="2_7vxqd"]
+[ext_resource type="Texture2D" uid="uid://dco6glmlpnxxt" path="res://assets/sanitybar.png" id="2_nmpci"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_blobw"]
+shader = ExtResource("2_7vxqd")
+shader_parameter/sanity = 100.0
+
+[node name="Sanitybar" type="Node2D"]
+script = ExtResource("1_54xuw")
+sanity = 50.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_blobw")
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_nmpci")
