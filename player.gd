@@ -72,7 +72,7 @@ func _on_tweet_received(text, result):
 		if similarity.value > 0.3 and similarity.value > maxValue / 2.0:
 			maxValue = similarity.value if similarity.value > maxValue else maxValue
 			var bubble = bubbles[similarity.bubble]
-			moveVector += position.direction_to(bubble.position) * (similarity.value*speed)
+			moveVector += position.direction_to(bubble.position) * (similarity.value*speed*20)
 		
 		# Send notifications
 		bubbles[similarity.bubble].new_notification(similarity.value)
@@ -84,4 +84,4 @@ func _on_tweet_received(text, result):
 		self.animation_player.play("walk")
 	
 func _draw():
-	draw_circle((targetPosition - global_position), 10, Color("#cecece"))
+	draw_circle(tar, 10, Color("#cecece"))
