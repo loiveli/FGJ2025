@@ -1,10 +1,15 @@
 from fastapi import FastAPI, Header, HTTPException
 import numpy as np
-
+import xformers.info
+print("Starting to load modules")
 from transformers import BitsAndBytesConfig
 from transformers import AutoModel
 import multiprocessing
+print("50 % of modules loaded")
 from torch.nn.functional import cosine_similarity
+
+from xformers import info
+
 
 from typing import Annotated
 
@@ -12,9 +17,10 @@ from fastapi import FastAPI, Header, HTTPException
 import uvicorn
 from sentence_transformers import SentenceTransformer
 import torch
-from settings import MODEL_NAME, DEVICE
-
-
+from settings import MODEL_NAME, DEVICE, DEBUG
+print("Module loading finished")
+if DEBUG:
+    info.print_info()
 
 class State():
     bubbles: list[str] | None = None
