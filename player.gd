@@ -1,8 +1,11 @@
 extends CharacterBody2D
 
+
+
 var targetPosition: Vector2 = position
 var collisionType = "PLAYER"
 var speed: int = 25
+@export var tweetTarget: Node2D
 @export var followerLabel: Label
 @export var sanityBar: Node2D
 var bubbles: Dictionary
@@ -42,6 +45,7 @@ func _physics_process(delta: float) -> void:
 	if (position - targetPosition).length() > speed * delta:
 		move = position.direction_to(targetPosition) * speed * delta
 	else:
+		tweetTarget.visible = false
 		sanity -= 0.001 * followers
 		position = targetPosition
 		self.animation_player.stop(false)
@@ -72,7 +76,7 @@ func _on_tweet_received(text, result):
 		if similarity.value > 0.3 and similarity.value > maxValue / 2.0:
 			maxValue = similarity.value if similarity.value > maxValue else maxValue
 			var bubble = bubbles[similarity.bubble]
-			moveVector += position.direction_to(bubble.position) * (similarity.value*speed*20)
+			moveVector += position.direction_to(bubble.position) * (similarity.value*(250+speed))
 		
 		# Send notifications
 		bubbles[similarity.bubble].new_notification(similarity.value)
@@ -82,6 +86,8 @@ func _on_tweet_received(text, result):
 		var facing = -1 if targetPosition.x < self.position.x else 1
 		self.animated.scale.x = facing * animated_original_scale_x
 		self.animation_player.play("walk")
+		tweetTarget.visible = true
+		tweetTarget.position = targetPosition
+		
 	
-func _draw():
-	draw_circle(tar, 10, Color("#cecece"))
+

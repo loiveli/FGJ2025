@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bponl4tqx263q"]
+[gd_scene load_steps=17 format=3 uid="uid://bponl4tqx263q"]
 
 [ext_resource type="Script" path="res://root.gd" id="1_td513"]
 [ext_resource type="Script" path="res://tweet_feed.gd" id="2_5e6nj"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://tweet_character_label.gd" id="4_lodnv"]
 [ext_resource type="PackedScene" uid="uid://dfr54ojd8lgxj" path="res://api/api.tscn" id="4_vjfwk"]
 [ext_resource type="PackedScene" uid="uid://dsb27wfudse5n" path="res://player_animation.tscn" id="7_l1adc"]
+[ext_resource type="PackedScene" uid="uid://cexvdwe4fa0g1" path="res://tweet_target.tscn" id="12_oc4mc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a1a0a"]
 
@@ -25,13 +26,14 @@ events = [SubResource("InputEventKey_oxstc")]
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_td513")
 
-[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("followerLabel", "sanityBar", "tweetButton")]
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("tweetTarget", "followerLabel", "sanityBar", "tweetButton")]
 process_priority = 1
 process_physics_priority = 1
 position = Vector2(500, 250)
 collision_layer = 8
 collision_mask = 7
 script = ExtResource("2_43n2e")
+tweetTarget = NodePath("../TweetTarget")
 followerLabel = NodePath("Phone/PhoneMargins/TwitterUI/HBoxContainer/TwitterFollowers")
 sanityBar = NodePath("Sanitybar")
 tweetButton = NodePath("Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetButton")
@@ -182,6 +184,9 @@ bubble = "Travel"
 [node name="MovieBubble" parent="." instance=ExtResource("4_1fda2")]
 position = Vector2(-391, 512)
 bubble = "Movies"
+
+[node name="TweetTarget" parent="." instance=ExtResource("12_oc4mc")]
+visible = false
 
 [node name="API" parent="." instance=ExtResource("4_vjfwk")]
 position = Vector2(-35, 207)
