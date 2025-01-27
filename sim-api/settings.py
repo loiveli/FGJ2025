@@ -1,3 +1,3 @@
-MODEL_NAME = "stella_400M"
-DEVICE = "cuda"
+MODEL_NAME = "mpnet"
+DEVICE = "cpu"
 DEBUG = False

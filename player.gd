@@ -17,8 +17,11 @@ var followers: int:
 	
 var sanity: float = 100:
 	set(value):
+		if value <=0:
+			get_tree().quit()
 		sanity = clamp(value,0,100)
 		sanityBar.sanity = value
+		
 
 @onready
 var animation_player: AnimationPlayer = $Animated/AnimationPlayer
@@ -66,7 +69,7 @@ func _physics_process(delta: float) -> void:
 
 
 
-func _on_tweet_received(text, result):
+func _on_tweet_received(id,text, result):
 	
 	var moveVector = Vector2(0, 0)
 	for similarity in result:
@@ -76,7 +79,7 @@ func _on_tweet_received(text, result):
 		if similarity.value > 0.3 and similarity.value > maxValue / 2.0:
 			maxValue = similarity.value if similarity.value > maxValue else maxValue
 			var bubble = bubbles[similarity.bubble]
-			moveVector += position.direction_to(bubble.position) * (similarity.value*(250+speed))
+			moveVector += position.direction_to(bubble.position) * (similarity.value*(250+speed+text.length()))
 		
 		# Send notifications
 		bubbles[similarity.bubble].new_notification(similarity.value)

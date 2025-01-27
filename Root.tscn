@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bponl4tqx263q"]
+[gd_scene load_steps=18 format=3 uid="uid://bponl4tqx263q"]
 
 [ext_resource type="Script" path="res://root.gd" id="1_td513"]
 [ext_resource type="Script" path="res://tweet_feed.gd" id="2_5e6nj"]
@@ -23,6 +23,10 @@ keycode = 4194309
 [sub_resource type="Shortcut" id="Shortcut_364db"]
 events = [SubResource("InputEventKey_oxstc")]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mdbvw"]
+radius = 22.0
+height = 110.0
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_td513")
 
@@ -35,17 +39,10 @@ collision_mask = 7
 script = ExtResource("2_43n2e")
 tweetTarget = NodePath("../TweetTarget")
 followerLabel = NodePath("Phone/PhoneMargins/TwitterUI/HBoxContainer/TwitterFollowers")
-sanityBar = NodePath("Sanitybar")
+sanityBar = NodePath("Animated/Sanitybar")
 tweetButton = NodePath("Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetButton")
 
-[node name="PlayerCollider" type="CollisionPolygon2D" parent="Player"]
-scale = Vector2(0.25, 0.25)
-polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64, 59.6, 64, 63.9, 59, 64, -61.1)
-
 [node name="Camera2D" type="Camera2D" parent="Player"]
-
-[node name="Sanitybar" parent="Player" instance=ExtResource("3_tgdsa")]
-position = Vector2(-25, -103)
 
 [node name="Phone" type="MarginContainer" parent="Player"]
 offset_left = 500.0
@@ -133,14 +130,20 @@ API = NodePath("../../../../../../../API")
 [node name="TweetCharacterLabel" type="Label" parent="Player/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer" node_paths=PackedStringArray("tweetEdit")]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "0/140"
 script = ExtResource("4_lodnv")
 tweetEdit = NodePath("../../TweetEdit")
 
 [node name="Animated" parent="Player" instance=ExtResource("7_l1adc")]
-position = Vector2(-14, -93)
+position = Vector2(0, -93)
+
+[node name="Sanitybar" parent="Player/Animated" instance=ExtResource("3_tgdsa")]
+position = Vector2(-50, -50)
+scale = Vector2(5, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(13, -42)
+shape = SubResource("CapsuleShape2D_mdbvw")
 
 [node name="FinlandBubble" parent="." instance=ExtResource("4_1fda2")]
 position = Vector2(1404, 1200)

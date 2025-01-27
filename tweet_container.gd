@@ -11,17 +11,19 @@ var tweetRetweets: int
 var reach: float = 0.1
 var tweetID: int
 var tweetFollowers: int
+var reachMult: float = 0.01
 
-func updateTweet():
+func updateTweet(delta):
 	if reach <1:
-		reach +=0.02
+		reach +=reachMult
+		reachMult *= 1+delta
 	tweetLikesLabel.text = str(int(tweetLikes*reach))
 	tweetRetweetLabel.text = str(int(tweetRetweets*reach))
 	tweetFollowersLabel.text = str(int(tweetFollowers*reach))
 
 
 func _process(delta):
-	updateTweet()
+	updateTweet(delta)
 
 func updateStats(likes: int, retweets: int,followers: int):
 	tweetLikes += likes

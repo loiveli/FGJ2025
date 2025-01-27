@@ -14,7 +14,7 @@ func _on_add_tweet(id,text):
 	newTweet.initTweet(id,text)
 	add_child(newTweet)
 
-func _on_update_tweet(id, result):
+func _on_update_tweet(id,text, result):
 	var tweetObject = get_children().filter(func(node):return node.tweetID == id)[0]
 	var followers = 0
 	for sim in result:

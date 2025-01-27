@@ -14,7 +14,7 @@ func resetPosition(nodes = nodeList):
 	var node1 = nodes.pick_random()
 	nodes.remove_at( nodes.find(node1))
 	var node2 = nodes.pick_random()
-	position = node2.position+((node1.position-node2.position) * randf_range(0.2,0.8))
+	position = node2.position+((node1.position-node2.position) * randf_range(0.3,0.7))
 
 
 

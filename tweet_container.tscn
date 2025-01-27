@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dji37qm3ocvmc"]
+[gd_scene load_steps=6 format=3 uid="uid://dji37qm3ocvmc"]
 
 [ext_resource type="Script" path="res://tweet_container.gd" id="1_ni4l5"]
-[ext_resource type="Texture2D" uid="uid://owaqu8ge7enj" path="res://assets/heart.png" id="2_mvevm"]
+[ext_resource type="Texture2D" uid="uid://bxetelmtehs2s" path="res://assets/heart-red.svg" id="2_gy4t5"]
+[ext_resource type="Texture2D" uid="uid://ds2of0awmx4gj" path="res://assets/refresh-double.svg" id="3_avpal"]
+[ext_resource type="Texture2D" uid="uid://be5xd6mpm0oj6" path="res://assets/community.svg" id="4_iev8l"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rlhf8"]
 
@@ -31,9 +33,10 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_rlhf8")
 [node name="TweetStats" type="HBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="TweetStats"]
+[node name="LikeIcon" type="TextureRect" parent="TweetStats"]
+modulate = Color(1, 0.27451, 0.0823529, 1)
 layout_mode = 2
-texture = ExtResource("2_mvevm")
+texture = ExtResource("2_gy4t5")
 expand_mode = 2
 
 [node name="TweetLikes" type="Label" parent="TweetStats"]
@@ -41,10 +44,20 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "100"
 
+[node name="RetweetIcon" type="TextureRect" parent="TweetStats"]
+layout_mode = 2
+texture = ExtResource("3_avpal")
+expand_mode = 2
+
 [node name="TweetRetweet" type="Label" parent="TweetStats"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "100"
+
+[node name="FollowerIcon" type="TextureRect" parent="TweetStats"]
+layout_mode = 2
+texture = ExtResource("4_iev8l")
+expand_mode = 2
 
 [node name="TweetFollowers" type="Label" parent="TweetStats"]
 layout_mode = 2

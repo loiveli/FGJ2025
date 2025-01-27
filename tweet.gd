@@ -1,6 +1,6 @@
 extends Button
 
-signal tweet_received(id:int,result)
+signal tweet_received(idNum:int,text:String,result)
 signal tweet_sent(idNum: int,text: String)
 
 @export var player: CharacterBody2D
@@ -23,11 +23,11 @@ func sendTweet(tweet):
 	
 	if bubblesSent:
 		result = await API.get_similarity_async(tweet)
-		tweet_received.emit(id,result)
+		tweet_received.emit(id,text,result)
 		print("Tweet done")
 	else:
 		result = await API.get_similarity_async(tweet,bubbles)
-		tweet_received.emit(id,result)
+		tweet_received.emit(id,text,result)
 		bubblesSent= true
 		print("Tweet done")
 
