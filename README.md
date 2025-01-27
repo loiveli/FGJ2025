@@ -5,9 +5,10 @@ How to run the game:
 2. Run the Avoiding_bubbles_server.exe
     Few disclaimers:
     1. On first launch, the server needs to download the model and save it in C:\Users\<UserName>\.cache for future use
-    2. Unfortunately we could not find a way to package our most powerful model, so you need to be quite literal for the model to register the topic
-    3. You will still need quite a beefy computer to run the model, as it will using your CPU for processing. 
-    4. We had a lot of trouble with CUDA on windows, but there might be a guide coming later on how to run the more poweful models on your GPU
+    2. You might see some errors, but unless the console window crashes/closes the server should be working
+    3. Unfortunately we could not find a way to package our most powerful model, so you need to be quite literal for the model to register the topic
+    4. You will still need quite a beefy computer to run the model, as it will using your CPU for processing. 
+    5. We had a lot of trouble with CUDA on windows, but there might be a guide coming later on how to run the more poweful models on your GPU
 3. Once you get the message "Uvicorn running on http://127.0.0.1:8000" you can start the game.
 4. You can test if the API connection is working by writing one of topics in the text box and pressing enter, you should start moving towards the topic once the server has responded.
 
