@@ -10,6 +10,7 @@ export_presets.cfg
 *.translation
 venv/
 build/
+builds/
 # Mono-specific ignores
 .mono/
 data_*/
