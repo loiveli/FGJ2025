@@ -35,7 +35,8 @@ func sendTweet(tweet):
 	for sim in result:
 		print(sim.bubble," ",sim.value)
 		if sim.value > 0.3 and sim.value > result[0].value/2:
-			followers += player.followers*(tweet.length()/140+sim.value)*0.25
-			print("followers: ",(sim.value*followers)," ",tweet.length()," ",100)
+			var newFollowers = player.followers*(tweet.length()/140+sim.value)*0.5
+			followers += newFollowers
+			print("followers: ",(newFollowers)," Tweet length multiplier: ",tweet.length()/140," Reach: ",sim.value)
 	player.followers += followers
 	

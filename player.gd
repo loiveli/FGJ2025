@@ -9,7 +9,7 @@ var bubbles: Dictionary
 var followers: int:
 	set(value):
 		followers = value
-		speed = 100+log(followers)*25
+		speed = 25+log(followers)*25
 		followerLabel.text = "Followers: " + str(followers)
 	
 var sanity: float = 100:
@@ -42,7 +42,7 @@ func _physics_process(delta: float) -> void:
 	if (position - targetPosition).length() > speed * delta:
 		move = position.direction_to(targetPosition) * speed * delta
 	else:
-		sanity -= 0.0001 * followers
+		sanity -= 0.001 * followers
 		position = targetPosition
 		self.animation_player.stop(false)
 	var collision = move_and_collide(move)
@@ -72,7 +72,7 @@ func _on_tweet_received(text, result):
 		if similarity.value > 0.3 and similarity.value > maxValue / 2.0:
 			maxValue = similarity.value if similarity.value > maxValue else maxValue
 			var bubble = bubbles[similarity.bubble]
-			moveVector += position.direction_to(bubble.position) * (similarity.value*500)
+			moveVector += position.direction_to(bubble.position) * (similarity.value*speed)
 		
 		# Send notifications
 		bubbles[similarity.bubble].new_notification(similarity.value)
