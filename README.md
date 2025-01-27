@@ -1,7 +1,7 @@
 # Avoiding bubbles
 FGJ2025 game where you move around a social media landscape by tweeting about different topics, and collect content that makes you slightly exhale from your nose while avoiding filter bubbles. Our game uses a local language model to parse which topics your tweet is related to and you move towards the related topics. You still need to be careful as tweeting too much about a single topic could lead to getting sucked into a social media bubble.
 How to run the game:
-1. Download the latest release .zip, which contains both the game and the server running the language model
+1. Download the game executable .zip from [GlobalGameJam](https://globalgamejam.org/games/2025/aivoiding-bubbles-8), which contains both the game and the server running the language model. We cant actually use github releases as the server EXE is over 4GB
 2. Run the Avoiding_bubbles_server.exe
     Few disclaimers:
     1. On first launch, the server needs to download the model and save it in C:\Users\<UserName>\.cache for future use
