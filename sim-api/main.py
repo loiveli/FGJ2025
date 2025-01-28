@@ -1,6 +1,5 @@
 from fastapi import FastAPI, Header, HTTPException
 import numpy as np
-import xformers.info
 print("Starting to load modules")
 from transformers import BitsAndBytesConfig
 from transformers import AutoModel
@@ -29,7 +28,7 @@ class State():
 class EmbeddingModel():
     # These are in order of "fastest and smallest" to "slowest and biggest"
     # Dictionary of format {model_name, embedding_dim}
-    _model_embed_dims = {"mpnet": 768, "stella_400M": 1024, "stella_1.5B": 1024, "nvembed": 4096}
+    _model_embed_dims = {"MiniLM":384,"mpnet": 768, "stella_400M": 1024, "stella_1.5B": 1024,"bge-m3":1024, "nvembed": 4096}
     _supported_models = _model_embed_dims.keys()
 
     prompt: str | None = None
@@ -64,6 +63,10 @@ class EmbeddingModel():
             )
             
             self.model = AutoModel.from_pretrained('nvidia/NV-Embed-v2', trust_remote_code=True, quantization_config=bnb_config).to(device=self.device)
+        elif model_name == "MiniLM":
+            self.model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2', device=self.device)
+        elif model_name == "bge-m3":
+            self.model = SentenceTransformer("BAAI/bge-m3", device=self.device)
 
     def embed(self, text: str, use_prompt: bool):
         if self.model_name is None or self.model is None:
@@ -75,6 +78,11 @@ class EmbeddingModel():
             return self.model.encode(text, prompt_name=self.prompt if use_prompt else None)
         elif self.model_name == "mpnet":
             return self.model.encode(text)
+        elif self.model_name == "MiniLM":
+            return self.model.encode(text)
+        elif self.model_name == "bge-m3":
+            return self.model.encode(text)
+            
 
 state = State()
 app = FastAPI()
@@ -111,5 +119,4 @@ async def get_sim(user_text: str = Header(), new_bubbles: Annotated[str | None, 
     return bubble_items[similarity_order].tolist()
 
 if __name__ == "__main__":
-    multiprocessing.freeze_support()
     uvicorn.run(app, host="127.0.0.1", port=8000, reload=False)
