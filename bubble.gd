@@ -9,11 +9,15 @@ var followers: int = 0:
 
 # Limits of where people spawn around the bubble
 var min_person_distance = 60
-var max_person_distance = 90
+var max_person_distance = 120
+var bubble: String 
+@export var topic: String
+@export var tweets: Array[String]
+@export var bubbleLabel: Label
 
 # Size limits at which each enemy starts spawning
-var bot_spawn_distance_threshold = 120
-var troll_spawn_distance_threshold = 150
+var bot_spawn_distance_threshold = 150
+var troll_spawn_distance_threshold = 180
 
 var bot_enemy_scene = preload("res://enemies/bot_enemy.tscn")
 var troll_enemy_scene = preload("res://enemies/troll_enemy.tscn")
@@ -29,14 +33,25 @@ func _ready():
 		var permanent_person_instance = permanent_person_scene.instantiate()
 		permanent_person_instance.position = _get_person_coordinates(min_person_distance)
 		add_child(permanent_person_instance)
-		
+	bubble = topic
 	# Add timer that creates temporary people every now and then
 	$PersonTimer.connect("timeout", Callable(self, "_on_person_timer_timeout"))
-	
+	_update_Bubble()
 	# Add (stochastic) timer that spawns enemies if size is large enough
 	_create_bot_timer()
 	_create_troll_timer()
-	
+	_create_update_timer()
+
+func _create_update_timer():
+	var update_timer := Timer.new()
+	var update_mean = 60
+	var update_delta = randf_range(-50,20)
+	update_timer.wait_time = update_mean + update_delta
+	update_timer.one_shot = true
+	add_child(update_timer)
+	update_timer.connect("timeout",_update_Bubble)
+	update_timer.start()
+
 	
 func _create_bot_timer():
 	var bot_spawn_timer := Timer.new()
@@ -89,7 +104,7 @@ func _get_person_coordinates(min_person_distance) -> Vector2:
 	# to Cartesian coordinates.
 	var theta = randf() * 2 * PI
 	var distance = min_person_distance + randf() * (max_person_distance - min_person_distance)
-	var x = distance * cos(theta)
+	var x = distance * cos(theta)*1.2
 	var y = distance * sin(theta)
 	
 	return Vector2(x, y)
@@ -119,4 +134,11 @@ func new_notification(similarity: float):
 			permanent_person_instance.position = _get_person_coordinates(previous_max_person_distance)
 			add_child(permanent_person_instance)
 	
-@export var bubble: String 
+
+func _update_Bubble():
+	if len(tweets)>0:
+		bubble = tweets.pick_random()
+		bubbleLabel.updateText(bubble, true)
+	else:
+		bubbleLabel.updateText(bubble)
+	

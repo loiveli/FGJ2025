@@ -18,7 +18,6 @@ func _on_update_tweet(id,text, result):
 	var tweetObject = get_children().filter(func(node):return node.tweetID == id)[0]
 	var followers = 0
 	for sim in result:
-		print(sim.bubble," ",sim.value)
 		if sim.value > 0.3 and sim.value > result[0].value/2:
 			followers += player.followers*(tweetObject.tweetText.length()/140+sim.value)*0.25
 	print(followers, " Followers gained")

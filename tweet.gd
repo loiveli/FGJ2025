@@ -15,7 +15,7 @@ func _on_pressed() -> void:
 	sendTweet(tweet)
 
 func sendTweet(tweet):
-	var bubbles = player.bubbles.keys()
+	var bubbles = player.bubbles.values().map(func (bubbleNode): return bubbleNode.topic)
 	var id = idNum
 	idNum +=1
 	tweet_sent.emit(id,tweet)
@@ -37,6 +37,6 @@ func sendTweet(tweet):
 		if sim.value > 0.3 and sim.value > result[0].value/2:
 			var newFollowers = player.followers*(tweet.length()/140+sim.value)*0.5
 			followers += newFollowers
-			print("followers: ",(newFollowers)," Tweet length multiplier: ",tweet.length()/140," Reach: ",sim.value)
+			
 	player.followers += followers
 	

@@ -8,12 +8,15 @@ var speed: int = 25
 @export var tweetTarget: Node2D
 @export var followerLabel: Label
 @export var sanityBar: Node2D
+@export var playerCamera: Camera2D
 var bubbles: Dictionary
 var followers: int:
 	set(value):
 		followers = value
+
 		speed = 25+log(followers)*25
 		followerLabel.text = "Followers: " + str(followers)
+		playerCamera.zoom =Vector2(1,1)/(1+log(followers)/20)
 	
 var sanity: float = 100:
 	set(value):
@@ -37,7 +40,7 @@ func _ready():
 	tweetButton.tweet_received.connect(_on_tweet_received)
 	var childNodes = $"..".get_children().filter(func(child): return child is StaticBody2D).filter(func(node): return node.collisionType == "BUBBLE")
 	for node in childNodes:
-		bubbles[node.bubble] = node
+		bubbles[node.topic] = node
 	
 func _on_button_send_impulse(impulseVector: Vector2) -> void:
 	targetPosition = position + impulseVector
@@ -60,7 +63,6 @@ func _physics_process(delta: float) -> void:
 			followers += 5
 			collider.queue_free()
 		elif collider.collisionType == "BUBBLE":
-			print("Gameover")
 			sanity = 0
 		elif collider.collisionType == "MEME":
 			sanity += 10
@@ -74,7 +76,6 @@ func _on_tweet_received(id,text, result):
 	var moveVector = Vector2(0, 0)
 	for similarity in result:
 		# Calculate movement vector delta
-		print(str(similarity.bubble) + " : " + str(similarity.value))
 		var maxValue = 0
 		if similarity.value > 0.3 and similarity.value > maxValue / 2.0:
 			maxValue = similarity.value if similarity.value > maxValue else maxValue
@@ -93,4 +94,3 @@ func _on_tweet_received(id,text, result):
 		tweetTarget.position = targetPosition
 		
 	
-

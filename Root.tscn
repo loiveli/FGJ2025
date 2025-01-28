@@ -30,7 +30,7 @@ height = 110.0
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_td513")
 
-[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("tweetTarget", "followerLabel", "sanityBar", "tweetButton")]
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("tweetTarget", "followerLabel", "sanityBar", "playerCamera", "tweetButton")]
 process_priority = 1
 process_physics_priority = 1
 position = Vector2(500, 250)
@@ -38,45 +38,46 @@ collision_layer = 8
 collision_mask = 7
 script = ExtResource("2_43n2e")
 tweetTarget = NodePath("../TweetTarget")
-followerLabel = NodePath("Phone/PhoneMargins/TwitterUI/HBoxContainer/TwitterFollowers")
+followerLabel = NodePath("Camera2D/Phone/PhoneMargins/TwitterUI/HBoxContainer/TwitterFollowers")
 sanityBar = NodePath("Animated/Sanitybar")
-tweetButton = NodePath("Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetButton")
+playerCamera = NodePath("Camera2D")
+tweetButton = NodePath("Camera2D/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetButton")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
-[node name="Phone" type="MarginContainer" parent="Player"]
+[node name="Phone" type="MarginContainer" parent="Player/Camera2D"]
 offset_left = 500.0
 offset_top = -450.0
 offset_right = 800.0
 offset_bottom = 460.0
 
-[node name="PhoneTexture" type="TextureRect" parent="Player/Phone"]
+[node name="PhoneTexture" type="TextureRect" parent="Player/Camera2D/Phone"]
 layout_mode = 2
 texture = ExtResource("2_b5mc6")
 expand_mode = 1
 
-[node name="PhoneMargins" type="MarginContainer" parent="Player/Phone"]
+[node name="PhoneMargins" type="MarginContainer" parent="Player/Camera2D/Phone"]
 layout_mode = 2
 theme_override_constants/margin_left = 35
 theme_override_constants/margin_top = 60
 theme_override_constants/margin_right = 35
 theme_override_constants/margin_bottom = 100
 
-[node name="TwitterUI" type="VBoxContainer" parent="Player/Phone/PhoneMargins"]
+[node name="TwitterUI" type="VBoxContainer" parent="Player/Camera2D/Phone/PhoneMargins"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Player/Phone/PhoneMargins/TwitterUI"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Player/Camera2D/Phone/PhoneMargins/TwitterUI"]
 layout_mode = 2
 
-[node name="TwitterFollowers" type="Label" parent="Player/Phone/PhoneMargins/TwitterUI/HBoxContainer"]
+[node name="TwitterFollowers" type="Label" parent="Player/Camera2D/Phone/PhoneMargins/TwitterUI/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Followers 100"
 
-[node name="TweetFeed" type="ScrollContainer" parent="Player/Phone/PhoneMargins/TwitterUI"]
+[node name="TweetFeed" type="ScrollContainer" parent="Player/Camera2D/Phone/PhoneMargins/TwitterUI"]
 custom_minimum_size = Vector2(0, 550)
 layout_mode = 2
 follow_focus = true
@@ -84,23 +85,23 @@ horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 script = ExtResource("2_5e6nj")
 
-[node name="TweetList" type="VBoxContainer" parent="Player/Phone/PhoneMargins/TwitterUI/TweetFeed" node_paths=PackedStringArray("player")]
+[node name="TweetList" type="VBoxContainer" parent="Player/Camera2D/Phone/PhoneMargins/TwitterUI/TweetFeed" node_paths=PackedStringArray("player")]
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("3_fxa6y")
-player = NodePath("../../../../..")
+player = NodePath("../../../../../..")
 
-[node name="HSeparator" type="HSeparator" parent="Player/Phone/PhoneMargins/TwitterUI"]
+[node name="HSeparator" type="HSeparator" parent="Player/Camera2D/Phone/PhoneMargins/TwitterUI"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_a1a0a")
 
-[node name="NewTweet" type="VBoxContainer" parent="Player/Phone/PhoneMargins/TwitterUI"]
+[node name="NewTweet" type="VBoxContainer" parent="Player/Camera2D/Phone/PhoneMargins/TwitterUI"]
 layout_mode = 2
 
-[node name="TweetEdit" type="TextEdit" parent="Player/Phone/PhoneMargins/TwitterUI/NewTweet" node_paths=PackedStringArray("tweetButton")]
+[node name="TweetEdit" type="TextEdit" parent="Player/Camera2D/Phone/PhoneMargins/TwitterUI/NewTweet" node_paths=PackedStringArray("tweetButton")]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_colors/background_color = Color(0.968627, 0.968627, 0.968627, 1)
@@ -112,10 +113,10 @@ wrap_mode = 1
 script = ExtResource("3_vcubs")
 tweetButton = NodePath("../VBoxContainer/TweetButton")
 
-[node name="VBoxContainer" type="HBoxContainer" parent="Player/Phone/PhoneMargins/TwitterUI/NewTweet"]
+[node name="VBoxContainer" type="HBoxContainer" parent="Player/Camera2D/Phone/PhoneMargins/TwitterUI/NewTweet"]
 layout_mode = 2
 
-[node name="TweetButton" type="Button" parent="Player/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer" node_paths=PackedStringArray("player", "tweetText", "API")]
+[node name="TweetButton" type="Button" parent="Player/Camera2D/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer" node_paths=PackedStringArray("player", "tweetText", "API")]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -123,11 +124,11 @@ shortcut = SubResource("Shortcut_364db")
 text = "Tweet"
 flat = true
 script = ExtResource("3_063s7")
-player = NodePath("../../../../../..")
+player = NodePath("../../../../../../..")
 tweetText = NodePath("../../TweetEdit")
-API = NodePath("../../../../../../../API")
+API = NodePath("../../../../../../../../API")
 
-[node name="TweetCharacterLabel" type="Label" parent="Player/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer" node_paths=PackedStringArray("tweetEdit")]
+[node name="TweetCharacterLabel" type="Label" parent="Player/Camera2D/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer" node_paths=PackedStringArray("tweetEdit")]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "0/140"
@@ -146,47 +147,66 @@ position = Vector2(13, -42)
 shape = SubResource("CapsuleShape2D_mdbvw")
 
 [node name="FinlandBubble" parent="." instance=ExtResource("4_1fda2")]
-position = Vector2(1404, 1200)
-bubble = "Finland"
+position = Vector2(-87, 1252)
+topic = "Overwatch"
 
 [node name="AIBubble" parent="." instance=ExtResource("4_1fda2")]
-position = Vector2(1814, 839)
-bubble = "AI"
+position = Vector2(-83, 619)
+topic = "Dota 2"
+tweets = Array[String](["I love pudge, hitting hooks feels amazing"])
 
 [node name="PoliticsBubble" parent="." instance=ExtResource("4_1fda2")]
-position = Vector2(149, -516)
-bubble = "Politics"
+position = Vector2(387, -1113)
+topic = "Politics"
 
 [node name="SportsBubble" parent="." instance=ExtResource("4_1fda2")]
-position = Vector2(1484, 276)
+position = Vector2(1228, 190)
+topic = "NBA"
+tweets = Array[String](["Lebron James is washed, he has no aura. Lakers need more grit", "Lebron is the undisputed GOAT, nobody else is on his level", "Hot take, but Lebron is not the GOAT. I would take MJ over Lebron any day"])
 
 [node name="CarsBubble" parent="." instance=ExtResource("4_1fda2")]
-position = Vector2(1319, -393)
-bubble = "Cars"
+position = Vector2(1409, -716)
+topic = "NFL"
 
 [node name="MemeBubble" parent="." instance=ExtResource("4_1fda2")]
 position = Vector2(2402, -639)
-bubble = "Memes"
+topic = "NHL"
+
+[node name="GamesBubble2" parent="." instance=ExtResource("4_1fda2")]
+position = Vector2(-1100, -1428)
+topic = "Memes"
+
+[node name="GamesBubble3" parent="." instance=ExtResource("4_1fda2")]
+position = Vector2(-1292, 1460)
+topic = "League of Legends"
 
 [node name="GamesBubble" parent="." instance=ExtResource("4_1fda2")]
-position = Vector2(27, 245)
-bubble = "Videogames"
+position = Vector2(-1154, 101)
+topic = "Pop music"
 
 [node name="MusicBubble" parent="." instance=ExtResource("4_1fda2")]
-position = Vector2(493, 626)
-bubble = "Music"
+position = Vector2(-207, -144)
+topic = "Rock music"
 
 [node name="USABubble" parent="." instance=ExtResource("4_1fda2")]
-position = Vector2(-201, 1268)
-bubble = "USA"
+position = Vector2(2356, 1014)
+topic = "New York"
+
+[node name="TravelBubble2" parent="." instance=ExtResource("4_1fda2")]
+position = Vector2(3369, 417)
+topic = "USA"
 
 [node name="TravelBubble" parent="." instance=ExtResource("4_1fda2")]
-position = Vector2(-675, -292)
-bubble = "Travel"
+position = Vector2(2647, 1680)
+topic = "Travel"
+
+[node name="MovieBubble2" parent="." instance=ExtResource("4_1fda2")]
+position = Vector2(1060, 1387)
+topic = "Marvel"
 
 [node name="MovieBubble" parent="." instance=ExtResource("4_1fda2")]
-position = Vector2(-391, 512)
-bubble = "Movies"
+position = Vector2(630, 2095)
+topic = "HBO Series"
 
 [node name="TweetTarget" parent="." instance=ExtResource("12_oc4mc")]
 visible = false
@@ -195,9 +215,9 @@ visible = false
 position = Vector2(-35, 207)
 RETURN_HARDCODED_VALUE = true
 
-[connection signal="text_changed" from="Player/Phone/PhoneMargins/TwitterUI/NewTweet/TweetEdit" to="Player/Phone/PhoneMargins/TwitterUI/NewTweet/TweetEdit" method="_on_text_changed"]
-[connection signal="text_changed" from="Player/Phone/PhoneMargins/TwitterUI/NewTweet/TweetEdit" to="Player/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetCharacterLabel" method="_on_tweet_edit_text_changed"]
-[connection signal="pressed" from="Player/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetButton" to="Player/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetButton" method="_on_pressed"]
-[connection signal="tweet_received" from="Player/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetButton" to="Player/Phone/PhoneMargins/TwitterUI/TweetFeed/TweetList" method="_on_update_tweet"]
-[connection signal="tweet_sent" from="Player/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetButton" to="Player/Phone/PhoneMargins/TwitterUI/TweetFeed/TweetList" method="_on_add_tweet"]
-[connection signal="tweet_sent" from="Player/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetButton" to="Player/Phone/PhoneMargins/TwitterUI/NewTweet/TweetEdit" method="_on_tweet_button_tweet_sent"]
+[connection signal="text_changed" from="Player/Camera2D/Phone/PhoneMargins/TwitterUI/NewTweet/TweetEdit" to="Player/Camera2D/Phone/PhoneMargins/TwitterUI/NewTweet/TweetEdit" method="_on_text_changed"]
+[connection signal="text_changed" from="Player/Camera2D/Phone/PhoneMargins/TwitterUI/NewTweet/TweetEdit" to="Player/Camera2D/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetCharacterLabel" method="_on_tweet_edit_text_changed"]
+[connection signal="pressed" from="Player/Camera2D/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetButton" to="Player/Camera2D/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetButton" method="_on_pressed"]
+[connection signal="tweet_received" from="Player/Camera2D/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetButton" to="Player/Camera2D/Phone/PhoneMargins/TwitterUI/TweetFeed/TweetList" method="_on_update_tweet"]
+[connection signal="tweet_sent" from="Player/Camera2D/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetButton" to="Player/Camera2D/Phone/PhoneMargins/TwitterUI/TweetFeed/TweetList" method="_on_add_tweet"]
+[connection signal="tweet_sent" from="Player/Camera2D/Phone/PhoneMargins/TwitterUI/NewTweet/VBoxContainer/TweetButton" to="Player/Camera2D/Phone/PhoneMargins/TwitterUI/NewTweet/TweetEdit" method="_on_tweet_button_tweet_sent"]
