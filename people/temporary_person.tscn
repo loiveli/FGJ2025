@@ -1,7 +1,44 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0hqc840v44i1"]
+[gd_scene load_steps=6 format=3 uid="uid://d0hqc840v44i1"]
 
 [ext_resource type="Script" path="res://people/temporary_person.gd" id="1_pp8di"]
 [ext_resource type="Texture2D" uid="uid://f023arbjrx7d" path="res://assets/alien.png" id="2_uk4uj"]
+
+[sub_resource type="Animation" id="Animation_vxx04"]
+resource_name = "PersonFade"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vey5u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_62aak"]
+_data = {
+"PersonFade": SubResource("Animation_vxx04"),
+"RESET": SubResource("Animation_vey5u")
+}
 
 [node name="TemporaryPerson" type="RigidBody2D"]
 collision_layer = 2
@@ -12,3 +49,9 @@ script = ExtResource("1_pp8di")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_uk4uj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_62aak")
+}
+autoplay = "PersonFade"

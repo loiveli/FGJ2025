@@ -8,8 +8,8 @@ var followers: int = 0:
 		scale = Vector2(1 + (followers / 20.0), 1 + (followers / 20.0))
 
 # Limits of where people spawn around the bubble
-var min_person_distance = 60
-var max_person_distance = 120
+var min_person_distance = 75
+var max_person_distance = 100
 var bubble: String 
 @export var topic: String
 @export var tweets: Array[String]

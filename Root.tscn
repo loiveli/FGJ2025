@@ -147,11 +147,12 @@ position = Vector2(13, -42)
 shape = SubResource("CapsuleShape2D_mdbvw")
 
 [node name="FinlandBubble" parent="." instance=ExtResource("4_1fda2")]
-position = Vector2(-87, 1252)
+position = Vector2(-215, 611)
 topic = "Overwatch"
+tweets = Array[String](["I need healing"])
 
 [node name="AIBubble" parent="." instance=ExtResource("4_1fda2")]
-position = Vector2(-83, 619)
+position = Vector2(-398, 1964)
 topic = "Dota 2"
 tweets = Array[String](["I love pudge, hitting hooks feels amazing"])
 
